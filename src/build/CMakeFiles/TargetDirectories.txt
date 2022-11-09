@@ -1,0 +1,14 @@
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/install/local.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/install.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/list_install_components.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/rebuild_cache.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/edit_cache.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/install/strip.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/tp2.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/metnum.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/pybind11/CMakeFiles/install.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/pybind11/CMakeFiles/list_install_components.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/pybind11/CMakeFiles/rebuild_cache.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/pybind11/CMakeFiles/edit_cache.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/pybind11/CMakeFiles/install/strip.dir
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/pybind11/CMakeFiles/install/local.dir

@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build",
+  "command": "/usr/bin/c++     -Wall -I ../ -I /usr/include/python3.8  -g3 -O0 -Werror -g   -std=gnu++11 -o CMakeFiles/tp2.dir/main.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/main.cpp",
+  "file": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/main.cpp"
+},
+{
+  "directory": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build",
+  "command": "/usr/bin/c++     -Wall -I ../ -I /usr/include/python3.8  -g3 -O0 -Werror -g   -std=gnu++11 -o CMakeFiles/tp2.dir/utils.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.cpp",
+  "file": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.cpp"
+},
+{
+  "directory": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build",
+  "command": "/usr/bin/c++     -Wall -I ../ -I /usr/include/python3.8  -g3 -O0 -Werror -g   -std=gnu++11 -o CMakeFiles/tp2.dir/eigen.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.cpp",
+  "file": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.cpp"
+},
+{
+  "directory": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build",
+  "command": "/usr/bin/c++  -Dmetnum_EXPORTS -I/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/pybind11/include -I/usr/include/python3.8   -Wall -I ../ -I /usr/include/python3.8  -g3 -O0 -Werror -g -fPIC -fvisibility=hidden   -std=gnu++11 -o CMakeFiles/metnum.dir/metnum.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/metnum.cpp",
+  "file": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/metnum.cpp"
+},
+{
+  "directory": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build",
+  "command": "/usr/bin/c++  -Dmetnum_EXPORTS -I/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/pybind11/include -I/usr/include/python3.8   -Wall -I ../ -I /usr/include/python3.8  -g3 -O0 -Werror -g -fPIC -fvisibility=hidden   -std=gnu++11 -o CMakeFiles/metnum.dir/utils.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.cpp",
+  "file": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.cpp"
+},
+{
+  "directory": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build",
+  "command": "/usr/bin/c++  -Dmetnum_EXPORTS -I/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/pybind11/include -I/usr/include/python3.8   -Wall -I ../ -I /usr/include/python3.8  -g3 -O0 -Werror -g -fPIC -fvisibility=hidden   -std=gnu++11 -o CMakeFiles/metnum.dir/eigen.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.cpp",
+  "file": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.cpp"
+}
+]

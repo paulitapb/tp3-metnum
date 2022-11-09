@@ -1,0 +1,13 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src",
+            "binaryPath": "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/tp2",
+            "binaryArgs": []
+        }
+    ],
+    "files.associations": {
+        "ostream": "cpp"
+    },
+    "cmake.configureOnOpen": true
+}
