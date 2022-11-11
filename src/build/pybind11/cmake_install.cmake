@@ -1,8 +1,8 @@
-# Install script for directory: /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/pybind11
+# Install script for directory: /home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/pybind11
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src")
+  set(CMAKE_INSTALL_PREFIX "/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -35,5 +35,10 @@ endif()
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
+endif()
+
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 

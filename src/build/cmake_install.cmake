@@ -1,8 +1,8 @@
-# Install script for directory: /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src
+# Install script for directory: /home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src")
+  set(CMAKE_INSTALL_PREFIX "/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -37,33 +37,38 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+endif()
+
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
+  if(EXISTS "$ENV{DESTDIR}/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/notebooks/metnum.cpython-310-x86_64-linux-gnu.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/notebooks/metnum.cpython-310-x86_64-linux-gnu.so")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so"
+         FILE "$ENV{DESTDIR}/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/notebooks/metnum.cpython-310-x86_64-linux-gnu.so"
          RPATH "")
   endif()
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
+   "/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/notebooks/metnum.cpython-310-x86_64-linux-gnu.so")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks" TYPE MODULE FILES "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/metnum.cpython-38-x86_64-linux-gnu.so")
-  if(EXISTS "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
+  file(INSTALL DESTINATION "/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/notebooks" TYPE MODULE FILES "/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/build/metnum.cpython-310-x86_64-linux-gnu.so")
+  if(EXISTS "$ENV{DESTDIR}/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/notebooks/metnum.cpython-310-x86_64-linux-gnu.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/notebooks/metnum.cpython-310-x86_64-linux-gnu.so")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/notebooks/metnum.cpython-310-x86_64-linux-gnu.so")
     endif()
   endif()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/pybind11/cmake_install.cmake")
+  include("/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/build/pybind11/cmake_install.cmake")
 
 endif()
 
@@ -75,5 +80,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/valewodka/Desktop/UBA/Metodos/tp3-metnum/src/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

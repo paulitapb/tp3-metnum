@@ -1,8 +1,11 @@
 file(REMOVE_RECURSE
   "CMakeFiles/metnum.dir/eigen.cpp.o"
+  "CMakeFiles/metnum.dir/eigen.cpp.o.d"
   "CMakeFiles/metnum.dir/metnum.cpp.o"
+  "CMakeFiles/metnum.dir/metnum.cpp.o.d"
   "CMakeFiles/metnum.dir/utils.cpp.o"
-  "metnum.cpython-38-x86_64-linux-gnu.so"
+  "CMakeFiles/metnum.dir/utils.cpp.o.d"
+  "metnum.cpython-310-x86_64-linux-gnu.so"
   "metnum.pdb"
 )
 

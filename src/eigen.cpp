@@ -3,6 +3,7 @@
 #include <iostream>
 #include "eigen.h"
 
+#define CHECKPIVOT 1;
 using namespace std;
 
 
@@ -15,30 +16,42 @@ using Eigen::VectorXd;
 
 void elim_gauss(SparseMatrix &A, double epsilon){
     for(int i = 0; i< A.outerSize(); i++){ //Por cada fila pivot 
-		cout << i <<endl; 
 		double aii = A.coeff(i, i);
 		if(abs(aii) > epsilon){
-			
 			for(int j = i+1; j < A.innerSize(); j++){ 
 				SparseMatrix::InnerIterator it(A, j); 
+				if(abs(A.coeff(j, i)) < epsilon){
+					continue;
+				}
 				double mji = A.coeff(j, i)/aii;
-
+				cout << "Mji es " << mji << endl;
 				//It sobre la fila pivot 
-				for(SparseMatrix::InnerIterator itPivot(A, i);itPivot; ++itPivot){ 
-
+				for(SparseMatrix::InnerIterator itPivot(A, i); itPivot; ++itPivot){ 
 					if(itPivot.col() == it.col()){
-						A.coeffRef(j, it.col()) = it.value() - mji *itPivot.value(); 
+						A.coeffRef(j, it.col()) = it.value() - mji * itPivot.value(); 
 						++it; 
-					}//
-					else if(itPivot.col() < it.col()){
-						A.coeffRef(j, it.col()) = - mji *itPivot.value();  
+					}
+					else if(it || itPivot.col() < it.col()){
+						A.coeffRef(j, itPivot.col()) = - mji * itPivot.value();  
 					}
 				}
 			}	
-		}else{
-			if(A.row(i).nonZeros() == A.outerSize()){
-				cout << "No puedo pivotear" <<endl; 
+		}
+		else{  //TODO //NO CHEQUEA SI LA COLUMNA ES CERO!!!
+#ifdef CHECKPIVOT 
+			bool rompe = false;
+			Eigen::Block<Eigen::SparseMatrix<double, 1, int>, -1, 1, false> columnita = A.col(i);
+			for(int k = i+1; k < columnita.innerSize(); k++){
+				if(abs(columnita.coeffRef(k,0)) < epsilon){
+					cout << "No se pivotear" <<endl; 
+					rompe = true;
+					break;
+				}
 			}
+			if(rompe){ 
+				break;
+			}
+#endif
 		}	
 	}
 }
