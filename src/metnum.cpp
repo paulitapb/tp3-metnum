@@ -6,7 +6,6 @@
 #include <chrono>
 #include <iostream>
 #include "eigen.h"
-
 using namespace std;
 
 namespace py=pybind11;
@@ -20,4 +19,8 @@ PYBIND11_MODULE(metnum, m) {
         "deflation", &deflation,
         "doingthings"
     );
+    m.def(
+        "elim_gauss", &elim_gauss, 
+        "doingthings"
+    ); 
 }

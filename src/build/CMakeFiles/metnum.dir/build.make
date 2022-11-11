@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src
+CMAKE_SOURCE_DIR = /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build
+CMAKE_BINARY_DIR = /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/metnum.dir/depend.make
@@ -59,42 +59,42 @@ include CMakeFiles/metnum.dir/flags.make
 
 CMakeFiles/metnum.dir/metnum.cpp.o: CMakeFiles/metnum.dir/flags.make
 CMakeFiles/metnum.dir/metnum.cpp.o: ../metnum.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/metnum.dir/metnum.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/metnum.dir/metnum.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/metnum.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/metnum.dir/metnum.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/metnum.dir/metnum.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/metnum.cpp
 
 CMakeFiles/metnum.dir/metnum.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/metnum.dir/metnum.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/metnum.cpp > CMakeFiles/metnum.dir/metnum.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/metnum.cpp > CMakeFiles/metnum.dir/metnum.cpp.i
 
 CMakeFiles/metnum.dir/metnum.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/metnum.dir/metnum.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/metnum.cpp -o CMakeFiles/metnum.dir/metnum.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/metnum.cpp -o CMakeFiles/metnum.dir/metnum.cpp.s
 
 CMakeFiles/metnum.dir/utils.cpp.o: CMakeFiles/metnum.dir/flags.make
 CMakeFiles/metnum.dir/utils.cpp.o: ../utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/metnum.dir/utils.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/metnum.dir/utils.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/metnum.dir/utils.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/metnum.dir/utils.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/utils.cpp
 
 CMakeFiles/metnum.dir/utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/metnum.dir/utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.cpp > CMakeFiles/metnum.dir/utils.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/utils.cpp > CMakeFiles/metnum.dir/utils.cpp.i
 
 CMakeFiles/metnum.dir/utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/metnum.dir/utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.cpp -o CMakeFiles/metnum.dir/utils.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/utils.cpp -o CMakeFiles/metnum.dir/utils.cpp.s
 
 CMakeFiles/metnum.dir/eigen.cpp.o: CMakeFiles/metnum.dir/flags.make
 CMakeFiles/metnum.dir/eigen.cpp.o: ../eigen.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/metnum.dir/eigen.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/metnum.dir/eigen.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/metnum.dir/eigen.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/metnum.dir/eigen.cpp.o -c /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/eigen.cpp
 
 CMakeFiles/metnum.dir/eigen.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/metnum.dir/eigen.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.cpp > CMakeFiles/metnum.dir/eigen.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/eigen.cpp > CMakeFiles/metnum.dir/eigen.cpp.i
 
 CMakeFiles/metnum.dir/eigen.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/metnum.dir/eigen.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.cpp -o CMakeFiles/metnum.dir/eigen.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/eigen.cpp -o CMakeFiles/metnum.dir/eigen.cpp.s
 
 # Object files for target metnum
 metnum_OBJECTS = \
@@ -110,8 +110,9 @@ metnum.cpython-38-x86_64-linux-gnu.so: CMakeFiles/metnum.dir/utils.cpp.o
 metnum.cpython-38-x86_64-linux-gnu.so: CMakeFiles/metnum.dir/eigen.cpp.o
 metnum.cpython-38-x86_64-linux-gnu.so: CMakeFiles/metnum.dir/build.make
 metnum.cpython-38-x86_64-linux-gnu.so: CMakeFiles/metnum.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared module metnum.cpython-38-x86_64-linux-gnu.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared module metnum.cpython-38-x86_64-linux-gnu.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/metnum.dir/link.txt --verbose=$(VERBOSE)
+	/usr/bin/strip /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/metnum.cpython-38-x86_64-linux-gnu.so
 
 # Rule to build all files generated by this target.
 CMakeFiles/metnum.dir/build: metnum.cpython-38-x86_64-linux-gnu.so
@@ -123,6 +124,6 @@ CMakeFiles/metnum.dir/clean:
 .PHONY : CMakeFiles/metnum.dir/clean
 
 CMakeFiles/metnum.dir/depend:
-	cd /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/CMakeFiles/metnum.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/CMakeFiles/metnum.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/metnum.dir/depend
 

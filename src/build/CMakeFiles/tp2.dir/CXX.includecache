@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.cpp
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/eigen.cpp
 algorithm
 -
 chrono
@@ -14,33 +14,33 @@ chrono
 iostream
 -
 eigen.h
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/eigen.h
 
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/eigen.h
 types.h
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/types.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/types.h
 
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/main.cpp
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/main.cpp
 iostream
 -
 types.h
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/types.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/types.h
 utils.h
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/utils.h
 eigen.h
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/eigen.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/eigen.h
 
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/types.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/types.h
 Eigen/Sparse
 -
 Eigen/Dense
 -
 
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.cpp
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/utils.cpp
 utils.h
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/utils.h
 
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/utils.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/utils.h
 fstream
 -
 iomanip
@@ -56,5 +56,5 @@ math.h
 iostream
 -
 types.h
-/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/types.h
+/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/types.h
 

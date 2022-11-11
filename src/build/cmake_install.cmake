@@ -1,8 +1,8 @@
-# Install script for directory: /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src
+# Install script for directory: /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src")
+  set(CMAKE_INSTALL_PREFIX "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "Release")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,32 +38,32 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
+  if(EXISTS "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so"
+         FILE "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so"
          RPATH "")
   endif()
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
+   "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/notebooks" TYPE MODULE FILES "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/metnum.cpython-38-x86_64-linux-gnu.so")
-  if(EXISTS "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
+file(INSTALL DESTINATION "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks" TYPE MODULE FILES "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/metnum.cpython-38-x86_64-linux-gnu.so")
+  if(EXISTS "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/notebooks/metnum.cpython-38-x86_64-linux-gnu.so")
     endif()
   endif()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/pybind11/cmake_install.cmake")
+  include("/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/pybind11/cmake_install.cmake")
 
 endif()
 
@@ -75,5 +75,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

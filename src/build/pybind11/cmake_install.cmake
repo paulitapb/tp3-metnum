@@ -1,8 +1,8 @@
-# Install script for directory: /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src/pybind11
+# Install script for directory: /home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src/pybind11
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp2-metnum/src")
+  set(CMAKE_INSTALL_PREFIX "/home/paula/Documents/COMPUTACION/Metodos-2c2022/tp3-metnum/src")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "Release")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()

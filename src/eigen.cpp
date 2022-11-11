@@ -13,6 +13,65 @@ using Eigen::MatrixXd;
 //tipo Double(D)
 using Eigen::VectorXd;
 
+void elim_gauss(SparseMatrix &A, double epsilon){
+    for(int i = 0; i< A.outerSize(); i++){ //Por cada fila pivot 
+		cout << i <<endl; 
+		double aii = A.coeff(i, i);
+		if(abs(aii) > epsilon){
+			
+			for(int j = i+1; j < A.innerSize(); j++){ 
+				SparseMatrix::InnerIterator it(A, j); 
+				double mji = A.coeff(j, i)/aii;
+
+				//It sobre la fila pivot 
+				for(SparseMatrix::InnerIterator itPivot(A, i);itPivot; ++itPivot){ 
+
+					if(itPivot.col() == it.col()){
+						A.coeffRef(j, it.col()) = it.value() - mji *itPivot.value(); 
+						++it; 
+					}//
+					else if(itPivot.col() < it.col()){
+						A.coeffRef(j, it.col()) = - mji *itPivot.value();  
+					}
+				}
+			}	
+		}else{
+			if(A.row(i).nonZeros() == A.outerSize()){
+				cout << "No puedo pivotear" <<endl; 
+			}
+		}	
+	}
+}
+
+
+/* vector<double> backward_sust2(MatrizRalaCSR &A){
+    vector<double> res(A.n(), 0); 
+    
+    for(int i = A.n()-1; i >= 0; i--){ 
+        double suma = 0; 
+        vector<pair<int, double>> filai = A.row(i); 
+         
+        if(filai.size() < 2){
+            cout << "Hay una variable libre" <<endl; 
+            break;
+        }
+
+        int k = 0; 
+        for(int j = filai.size()-1; j >= 0; j--){
+            
+            if(i == filai[j].first) continue; 
+            
+            suma += filai[j].second * res[filai[j].first];
+             
+        } 
+        double aii = A.dameValor(i, i);
+        
+        res[i]= (A.dameValor(i, A.m()-1) - suma) / aii; 
+
+    } 
+    return res; 
+} */
+
 pair<double, Vector> power_iteration(const Matrix &X, unsigned niter, double eps)
 {
 	Eigen::VectorXd b = Vector::Random(X.cols());
