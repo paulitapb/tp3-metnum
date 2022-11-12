@@ -1,30 +1,39 @@
 #include "utils.h"
 
-SparseMatrix read_matrix_karate(){
+SparseMatrix read_test(string test_name){
+    string archivo =  "tests/" + test_name;
+
+    ifstream entrada(archivo);
+
     double epsilon = pow(10, -5);
+    
+    int n,elem_no_nulos;
+    int a,b;
 
-    ifstream input("../../datasets/karateclub_matriz.txt");  
-     
+    entrada >> n >> elem_no_nulos;  
+
     std::vector<T> tripletList;
-    tripletList.reserve(156);
+    tripletList.reserve(elem_no_nulos);
 
-    for(int i = 0; i < 34; i++){
-        for(int j = 0; j < 34; j++){
-            double e;
-            input >> e; 
-            if(abs(e-1) < epsilon ){
-                tripletList.push_back(T(i,j,e));                  
-            }
-        }
+    for(int i = 0; i < elem_no_nulos; i++){
+        entrada >> a >> b; 
+        tripletList.push_back(T(a-1,b-1, 1 ));
+        
     }
 
-    SparseMatrix mat_karate(34, 34);
-    mat_karate.setFromTriplets(tripletList.begin(), tripletList.end());
-    return mat_karate; 
+    SparseMatrix res(n, n);
+    res.setFromTriplets(tripletList.begin(), tripletList.end());
+    return res; 
 }
 
 void print_sparce_matrix(SparseMatrix &m){
     cout<< MatrixXd(m) <<endl;
+}
+void print_vector(vector<double> const &v){
+    for(int i = 0; i< v.size(); i++){
+        cout << v[i] << " " ; 
+    }
+    cout <<endl; 
 }
 
 
@@ -66,4 +75,21 @@ void out_eigvectors(Matrix eigvect, string path){
     }
 }
 
+/* void leer_test(string path){
+    ifstream input("../../datasets/ego-facebook.edges");  
+    int m = 28048; 
+    int n = 3436; 
 
+    std::vector<T> tripletList;
+    tripletList.reserve(m);
+
+    for(int i = 0; i < m; i++){
+        double a, b;
+        input >> a >> b; 
+        tripletList.push_back(T(a-1,b-1,1));
+    }
+
+    SparseMatrix mat_ego_face(n, n);
+    mat_ego_face.setFromTriplets(tripletList.begin(), tripletList.end());
+    return mat_ego_face; 
+} */
