@@ -6,84 +6,123 @@
 #define CHECKPIVOT 1;
 using namespace std;
 
-
 // Matriz, dinámica, de tamaño arbitrario (X), con elementos del tipo Double(D)
 using Eigen::MatrixXd;
 
-// Matriz de numero de filas arbitrario (X) , de 1 columna y con elementos del 
-//tipo Double(D)
+// Matriz de numero de filas arbitrario (X) , de 1 columna y con elementos del
+// tipo Double(D)
 using Eigen::VectorXd;
 
-void elim_gauss(SparseMatrix &A, double epsilon){
-    for(int i = 0; i< A.outerSize(); i++){ //Por cada fila pivot 
+void elim_gauss(SparseMatrix &A, double epsilon)
+{
+	for (int i = 0; i < A.outerSize(); i++)
+	{ // Por cada fila pivot
 		double aii = A.coeff(i, i);
-		if(abs(aii) > epsilon){
-			for(int j = i+1; j < A.innerSize(); j++){ 
-				SparseMatrix::InnerIterator it(A, j); 
-				if(abs(A.coeff(j, i)) < epsilon){
+		if (abs(aii) > epsilon)
+		{
+			for (int j = i + 1; j < A.innerSize(); j++)
+			{
+				SparseMatrix::InnerIterator it(A, j);
+				if (abs(A.coeff(j, i)) < epsilon)
+				{
 					continue;
 				}
-				double mji = A.coeff(j, i)/aii;
+				double mji = A.coeff(j, i) / aii;
 				cout << "Mji es " << mji << endl;
-				//It sobre la fila pivot 
-				for(SparseMatrix::InnerIterator itPivot(A, i); itPivot; ++itPivot){ 
-					if(itPivot.col() == it.col()){
-						A.coeffRef(j, it.col()) = it.value() - mji * itPivot.value(); 
-						++it; 
+				// It sobre la fila pivot
+				for (SparseMatrix::InnerIterator itPivot(A, i); itPivot; ++itPivot)
+				{
+					if (itPivot.col() == it.col())
+					{
+						A.coeffRef(j, it.col()) = it.value() - mji * itPivot.value();
+						++it;
 					}
-					else if(it || itPivot.col() < it.col()){
-						A.coeffRef(j, itPivot.col()) = - mji * itPivot.value();  
+					else if (it || itPivot.col() < it.col())
+					{
+						A.coeffRef(j, itPivot.col()) = -mji * itPivot.value();
 					}
 				}
-			}	
+			}
 		}
-		else{  //TODO //NO CHEQUEA SI LA COLUMNA ES CERO!!!
-#ifdef CHECKPIVOT 
+		else
+		{ // TODO //NO CHEQUEA SI LA COLUMNA ES CERO!!!
+#ifdef CHECKPIVOT
 			bool rompe = false;
 			Eigen::Block<Eigen::SparseMatrix<double, 1, int>, -1, 1, false> columnita = A.col(i);
-			for(int k = i+1; k < columnita.innerSize(); k++){
-				if(abs(columnita.coeffRef(k,0)) < epsilon){
-					cout << "No se pivotear" <<endl; 
+			for (int k = i + 1; k < columnita.innerSize(); k++)
+			{
+				if (abs(columnita.coeffRef(k, 0)) < epsilon)
+				{
+					cout << "No se pivotear" << endl;
 					rompe = true;
 					break;
 				}
 			}
-			if(rompe){ 
+			if (rompe)
+			{
 				break;
 			}
 #endif
-		}	
+		}
 	}
 }
 
-
 /* vector<double> backward_sust2(MatrizRalaCSR &A){
-    vector<double> res(A.n(), 0); 
-    
-    for(int i = A.n()-1; i >= 0; i--){ 
-        double suma = 0; 
-        vector<pair<int, double>> filai = A.row(i); 
-         
-        if(filai.size() < 2){
-            cout << "Hay una variable libre" <<endl; 
-            break;
-        }
+	vector<double> res(A.n(), 0);
 
-        int k = 0; 
-        for(int j = filai.size()-1; j >= 0; j--){
-            
-            if(i == filai[j].first) continue; 
-            
-            suma += filai[j].second * res[filai[j].first];
-             
-        } 
-        double aii = A.dameValor(i, i);
-        
-        res[i]= (A.dameValor(i, A.m()-1) - suma) / aii; 
+	for(int i = A.n()-1; i >= 0; i--){
+		double suma = 0;
+		vector<pair<int, double>> filai = A.row(i);
 
-    } 
-    return res; 
+		if(filai.size() < 2){
+			cout << "Hay una variable libre" <<endl;
+			break;
+		}
+
+		int k = 0;
+		for(int j = filai.size()-1; j >= 0; j--){
+
+			if(i == filai[j].first) continue;
+
+			suma += filai[j].second * res[filai[j].first];
+
+		}
+		double aii = A.dameValor(i, i);
+
+		res[i]= (A.dameValor(i, A.m()-1) - suma) / aii;
+
+	}
+	return res;
 } */
+
+double jacobiSum(Vector x, SparseMatrix &A, int i)
+{
+	double sum = 0;
+	for (int j = 0; j < x.size(); j++)
+	{
+		if (j == i)
+			continue;
+
+		sum += A.coeff(i, j) * x(j);
+	}
+	return sum;
+}
+
+Vector jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
+{
+	Vector prev = Vector::Ones(x.size());
+	int iter = 0;
+	while (abs(prev(0) - x(0)) >= epsilon || iter < k)
+	{
+		prev = x;
+		for (int i = 0; i < x.size(); i++)
+		{
+			x(i) = (b(i) - jacobiSum(prev, A, i)) / A.coeff(i, i);
+		}
+		iter++;
+	}
+	return x;
+}
 
 pair<double, Vector> power_iteration(const Matrix &X, unsigned niter, double eps)
 {
