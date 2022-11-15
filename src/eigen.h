@@ -18,7 +18,7 @@ y el segundo el autovector asociado
 */
 
 std::pair<double, Vector> power_iteration(const Matrix &mat, unsigned num_iter = 5000, double eps = 1e-16);
-void elim_gauss(SparseMatrix &A, double epsilon); 
+void elim_gauss(SparseMatrix &A, vector<double> &b, double epsilon); 
 /*
 Calcula
 Parámetros:

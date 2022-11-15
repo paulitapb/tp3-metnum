@@ -2,6 +2,7 @@
 #include <chrono>
 #include <iostream>
 #include "eigen.h"
+#include "utils.h"
 
 #define CHECKPIVOT 1;
 using namespace std;
@@ -14,7 +15,7 @@ using Eigen::MatrixXd;
 //tipo Double(D)
 using Eigen::VectorXd;
 
-void elim_gauss(SparseMatrix &A, double epsilon){
+void elim_gauss(SparseMatrix &A, vector<double> &b, double epsilon){
     for(int i = 0; i< A.outerSize(); i++){ //Por cada fila pivot 
 		double aii = A.coeff(i, i);
 		if(abs(aii) > epsilon){
@@ -24,20 +25,26 @@ void elim_gauss(SparseMatrix &A, double epsilon){
 					continue;
 				}
 				double mji = A.coeff(j, i)/aii;
-				cout << "Mji es " << mji << endl;
+				//cout << "Mji es " << mji << endl;
 				//It sobre la fila pivot 
 				for(SparseMatrix::InnerIterator itPivot(A, i); itPivot; ++itPivot){ 
+					cout << "Aca itpivotcol vale " << itPivot.col() << endl;
+					cout << "Aca itcol vale " << it.col() << endl;
+
 					if(itPivot.col() == it.col()){
+						cout << "HOLA " << "J vale "<< j << " y itcol vale " << it.col() << " aij es " << A.coeffRef(j, it.col()) << endl;
 						A.coeffRef(j, it.col()) = it.value() - mji * itPivot.value(); 
 						++it; 
 					}
-					else if(it || itPivot.col() < it.col()){
-						A.coeffRef(j, itPivot.col()) = - mji * itPivot.value();  
+					else if(it || itPivot.col() > it.col()){ //MAYOR O MENOR?
+						cout << "CHAU " <<"J vale "<< j << " y itcol vale " << itPivot.col() << " aij es " << A.coeffRef(j, it.col()) << endl;
+						A.coeffRef(j, itPivot.col()) = 0 - mji * itPivot.value();  
 					}
+					b[j] -= mji * b[i];
 				}
 			}	
 		}
-		else{  //TODO //NO CHEQUEA SI LA COLUMNA ES CERO!!!
+		else{  //TODO NO CHEQUEA SI LA COLUMNA ES CERO!!!
 #ifdef CHECKPIVOT 
 			bool rompe = false;
 			Eigen::Block<Eigen::SparseMatrix<double, 1, int>, -1, 1, false> columnita = A.col(i);

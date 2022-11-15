@@ -23,24 +23,26 @@ vector<double> page_rank(string test_path, double p){
     
     SparseMatrix W = read_test("test_aleatorio.txt");
 
-    print_sparce_matrix(W);
+    //print_sparce_matrix(W);
     int n = W.outerSize();
 
     //armamos  D y una identidad 
-    SparseMatrix I(n,n+1);
+    SparseMatrix I(n,n);
     SparseMatrix D(n,n);
 
     for(int i = 0; i < n; i++){
-        I.coeffRef(i, i) =1;
-        I.coeffRef(i, n) =1;
+        I.coeffRef(i, i) = 1;
+        //I.coeffRef(i, n) = 1;
         double colSum = W.col(i).sum();
         if(abs(colSum) > epsilon){
             D.coeffRef(i, i) = 1/colSum;
         }
     } 
 
+    cout << "Identidad" << endl;
     print_sparce_matrix(I);
 
+    cout << "Diagonal" << endl;
     print_sparce_matrix(D);
     
 
@@ -48,28 +50,31 @@ vector<double> page_rank(string test_path, double p){
     SparseMatrix WD(n,n); 
     WD = W*D;
 
+    cout << "WD" << endl;
     print_sparce_matrix(WD);
 
     // pW
     WD = p* WD;
 
+    cout << "pWD" << endl;
     print_sparce_matrix(WD);
      
     
     // A = I-pWD
     SparseMatrix A(n, n);
-
-    // todo QUE ONDA SI CREO LA IDENTIDAD MAS GRANDE Y DESPUES LA RESTO 
-    A = I- WD; 
-
-    //A.resize(n, n+1);
-
-    /* for(int i = 0; i < n ; i++){
-        A.coeffRef(i, n) = 1;
-    }
-     */
-
+    A = I - WD; 
+    cout << "A" << endl;
     print_sparce_matrix(A);
+    
+    // Generamos b
+    vector <double> b(n, 1);
+
+    //Aplicamos EG
+    elim_gauss(A, b, epsilon);
+
+    cout << "Con EG A vale (wodka):" << endl;
+
+
     return {};
     /*
     vector<double> e(w.n(), 1); 
