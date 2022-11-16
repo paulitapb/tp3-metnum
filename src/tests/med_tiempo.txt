@@ -1,6 +1,6 @@
 Instancia 	 	 	 	  	 	 	& n 	 	 & m 	 	 & Tiempo tardado  	 & test_result 	 	 & Error Abs 	 	
-test_aleatorio_desordenado.txt 	 	 & 5 	 	 & 12 	 	 & 0.00027952 seg 	   & 	OK& 	0.00000012
-test_aleatorio.txt 	 	 	 	 	 & 5 	 	 & 12 	 	 & 0.00023796 seg 	   & 	OK& 	0.00002000
-test_completo.txt 	 	 	 	 	 & 5 	 	 & 20 	 	 & 0.00022393 seg 	   & 	OK& 	0.00000000
-test_sin_links.txt 	 	 	 	 	 & 5 	 	 & 0 	 	 & 0.00018096 seg 	   & 	OK& 	0.00000000
-test_trivial.txt 	 	 	 	 	 & 1 	 	 & 0 	 	 & 0.00007645 seg 	   & 	OK& 	0.00000000
+test_aleatorio_desordenado.txt 	 	 & 5 	 	 & 12 	 	 & 0.00009398 seg 	   & 	OK& 	0.00000012
+test_aleatorio.txt 	 	 	 	 	 & 5 	 	 & 12 	 	 & 0.00004992 seg 	   & 	OK& 	0.00002000
+test_completo.txt 	 	 	 	 	 & 5 	 	 & 20 	 	 & 0.00005365 seg 	   & 	OK& 	0.00000000
+test_sin_links.txt 	 	 	 	 	 & 5 	 	 & 0 	 	 & 0.00003542 seg 	   & 	OK& 	0.00000000
+test_trivial.txt 	 	 	 	 	 & 1 	 	 & 0 	 	 & 0.00002742 seg 	   & 	OK& 	0.00000000

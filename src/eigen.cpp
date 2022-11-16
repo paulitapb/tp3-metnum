@@ -88,10 +88,10 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 	}
 }
 
-vector<double> backward_sust(SparseMatrix &A, Vector &b){
+Vector backward_sust(SparseMatrix &A, Vector &b){
 	//Falta que tome un vector y que tomo el ultimo valor del vector
 
-	vector<double> res(A.outerSize(), 0);
+	Vector res(A.outerSize(), 0);
 
 	for (int i = A.outerSize() - 1; i >= 0; i--)
 	{
@@ -106,11 +106,11 @@ vector<double> backward_sust(SparseMatrix &A, Vector &b){
 		int k = 0;  
 		for(SVector::ReverseInnerIterator itFila(filai); itFila; --itFila){
 			if(i == itFila.index()) continue;
-			suma += itFila.value() * res[itFila.index()];
+			suma += itFila.value() * res(itFila.index());
 
 		}
 		double aii = A.coeff(i, i);
-		res[i]= (b[i] - suma) / aii;
+		res(i)= (b[i] - suma) / aii;
 
 	}
 	return res;

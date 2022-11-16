@@ -19,10 +19,9 @@ vector<double> p = {0.9, 0.8, 0.76, 0.85, 0.5, 0.64, 0.3};
 
 vector<string> res_output = {"NO PASO", "OK"};
 
-vector<double> page_rank_EG(string test_path, double p){
-    SparseMatrix W = read_test(test_path);
-    int n = W.outerSize();
-
+void armarMatrizA(string test_path, SparseMatrix &W, SparseMatrix &A, double p){
+    int n = W.outerSize();  
+    
     // armamos  D y una identidad
     SparseMatrix I(n, n);
     SparseMatrix D(n, n);
@@ -30,8 +29,7 @@ vector<double> page_rank_EG(string test_path, double p){
     for (int i = 0; i < n; i++){
         I.coeffRef(i, i) = 1;
         double colSum = W.col(i).sum();
-        if (abs(colSum) > epsilon)
-        {
+        if (abs(colSum) > epsilon){
             D.coeffRef(i, i) = 1 / colSum;
         }
     }
@@ -47,29 +45,78 @@ vector<double> page_rank_EG(string test_path, double p){
     SparseMatrix A(n, n);
 
     A = I - WD;
+}
 
-    //print_sparce_matrix(A);
+Vector page_rank_EG(string test_path, double p){
+    
+    SparseMatrix W = read_test(test_path);
+    int n = W.outerSize();
+    
+    SparseMatrix A(n, n);
+
+    armarMatrizA(test_path, W, A, p); 
     
     Vector e = Vector::Ones(n);
 
     //Triangulamos el sistema
     elim_gauss(A, e, 1e-5);
 
-    print_sparce_matrix(A);
-    cout << e <<endl; 
-
     //Resuelvo el sistema
-    vector<double> ranks = backward_sust(A, e);
+    Vector ranks = backward_sust(A, e);
 
     //Normalizo la solucion
     normalizar_vector(ranks);
 
-    print_vector(ranks); 
 
     return ranks; 
 }
 
-pair<bool, double> resultados_tests(string res_path, vector<double> const &v){
+Vector page_rank_Jacobi(string test_path, double p){
+    
+    SparseMatrix W = read_test(test_path);
+    int n = W.outerSize();
+    
+    SparseMatrix A(n, n);
+
+    armarMatrizA(test_path, W, A, p); 
+
+    Vector xo = Vector::Ones(n); 
+
+    Vector v = jacobi(xo, xo, A, 10000, 1e-5); 
+
+    //Triangulamos el sistema
+    Vector ranks;
+
+    //Normalizo la solucion
+    normalizar_vector(ranks);
+
+
+    return ranks; 
+}
+
+Vector page_rank_GS(string test_path, double p){
+    
+    SparseMatrix W = read_test(test_path);
+    int n = W.outerSize();
+    
+    SparseMatrix A(n, n);
+
+    armarMatrizA(test_path, W, A, p); 
+
+    Vector xo = Vector::Ones(n); 
+
+    Vector v = gauss_seidel(xo, xo, A, 10000, 1e-5); 
+
+    //Triangulamos el sistema
+    Vector ranks;
+
+    //Normalizo la solucion
+    normalizar_vector(ranks);
+
+    return ranks; 
+}
+
+pair<bool, double> resultados_tests(string res_path, Vector const &v){
     string archivo = "tests/" + res_path;
     string archivo_out = "test_out/" + res_path;  
     ifstream entrada(archivo);
@@ -82,10 +129,10 @@ pair<bool, double> resultados_tests(string res_path, vector<double> const &v){
     double suma_error = 0; 
     for(int i = 0; i< v.size();i++){
         entrada >> res[i];  
-        salida << fixed << setprecision(4) << v[i] <<endl; 
+        salida << fixed << setprecision(4) << v(i) <<endl; 
 
-        suma_error += fabs(v[i]-res[i]); 
-        if(fabs(v[i]-res[i]) > 0.0001){
+        suma_error += fabs(v(i)-res[i]); 
+        if(fabs(v(i)-res[i]) > 0.0001){
             paso_test &= false; 
         }
     }
@@ -112,7 +159,7 @@ void correr_test_catedra(){
         auto inicio = chrono::high_resolution_clock::now();
 
         //Calculo de rankings   
-        vector<double> puntajes_finales = page_rank_EG(test, p[i-1]); 
+        Vector puntajes_finales = page_rank_EG(test, p[i-1]); 
         
         auto final = chrono::high_resolution_clock::now();
         chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;

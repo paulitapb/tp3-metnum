@@ -75,13 +75,13 @@ void out_eigvectors(Matrix eigvect, string path){
     }
 }
 
-void normalizar_vector(vector<double> &v){
+void normalizar_vector(Vector &v){
     double suma = 0; 
     for(int i = 0; i< v.size(); i++){
-        suma += fabs(v[i]);  
+        suma += fabs(v(i));  
     } 
     for(int i = 0; i< v.size(); i++){
-        v[i] = v[i] / suma;  
+        v(i) = v(i) / suma;  
     }
 }
 /* void leer_test(string path){
