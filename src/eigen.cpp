@@ -2,7 +2,7 @@
 #include <chrono>
 #include <iostream>
 #include "eigen.h"
-#include "utils.h"
+
 #define CHECKPIVOT 1;
 using namespace std;
 
@@ -13,8 +13,7 @@ using Eigen::MatrixXd;
 // tipo Double(D)
 using Eigen::VectorXd;
 
-void elim_gauss(SparseMatrix &A,  double epsilon){
-	
+void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 	
 	for (int i = 0; i < A.outerSize()-1; i++)
 	{ // Por cada fila pivot
@@ -23,7 +22,8 @@ void elim_gauss(SparseMatrix &A,  double epsilon){
 		if (abs(aii) > epsilon)
 		{
 			for (int j = i + 1; j < A.outerSize(); j++)
-			{ //Recorro cada una de las filas de adentro	
+			{ //Recorro cada una de las filas de adentro
+					
 				SVector filaPivot = A.innerVector(i); 
 				SVector filaJ = A.innerVector(j); 	
 
@@ -34,7 +34,7 @@ void elim_gauss(SparseMatrix &A,  double epsilon){
 				
 				double mji = A.coeff(j, i) / aii;
 				//cout << "Mji es " << mji << endl;
-
+				v.coeffRef(j) = v.coeffRef(j) - mji*v.coeffRef(i); 
 				// It sobre la fila pivot
 				SVector::InnerIterator itPivot(filaPivot);
 				SVector::InnerIterator it(filaJ);  
@@ -55,7 +55,6 @@ void elim_gauss(SparseMatrix &A,  double epsilon){
 						++itPivot;
 					}else if(itPivot.index() > it.index()){
 						++it; 
-						
 					}
 					else if (itPivot.index() < it.index() or it )
 					{
@@ -86,15 +85,16 @@ void elim_gauss(SparseMatrix &A,  double epsilon){
 #endif
 		}
 	} 
-	cout << MatrixXd(A) <<endl; 
+ 
 }
 
-/* vector<double> backward_sust2(MatrizRalaCSR &A){
-	vector<double> res(A.n(), 0);
+vector<double> backward_sust(SparseMatrix &A){
+	//Falta que tome un vector y que tomo el ultimo valor del vector
+	vector<double> res(A.outerSize(), 0);
 
-	for(int i = A.n()-1; i >= 0; i--){
+	for(int i = A.outerSize()-1; i >= 0; i--){
 		double suma = 0;
-		vector<pair<int, double>> filai = A.row(i);
+		SVector filai = A.row(i);
 
 		if(filai.size() < 2){
 			cout << "Hay una variable libre" <<endl;
@@ -104,18 +104,18 @@ void elim_gauss(SparseMatrix &A,  double epsilon){
 		int k = 0;
 		for(int j = filai.size()-1; j >= 0; j--){
 
-			if(i == filai[j].first) continue;
+			if(i == filai.coeff(j).first) continue;
 
-			suma += filai[j].second * res[filai[j].first];
+			suma += filai(j).second * res[filai(j).first];
 
 		}
-		double aii = A.dameValor(i, i);
+		double aii = A.coeff(i, i);
 
-		res[i]= (A.dameValor(i, A.m()-1) - suma) / aii;
+		res[i]= (A.coeff(i, A.outerSiz()-1) - suma) / aii;
 
 	}
 	return res;
-} */
+}
 
 double jacobiSum(Vector x, SparseMatrix &A, int i)
 {

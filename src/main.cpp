@@ -21,7 +21,7 @@ vector<string> res_output = {"NO PASO", "OK"};
 vector<double> page_rank(string test_path, double p)
 {
 
-    SparseMatrix W = read_test("test_aleatorio.txt");
+    SparseMatrix W = read_test(test_path);
 
     int n = W.outerSize();
 
@@ -54,19 +54,16 @@ vector<double> page_rank(string test_path, double p)
     A = I - WD;
 
     print_sparce_matrix(A);
-
-    elim_gauss(A, 1e-5);
-
-    //print_sparce_matrix(A);
-    return {};
-    /*
-    vector<double> e(w.n(), 1);
-
-    //Agregamos e para obtener el sistema Ax = e
-    A.agregarColumna(e);
+    
+    Vector e = Vector::Ones(n);
 
     //Triangulamos el sistema
-    elim_gauss2(A);
+    elim_gauss(A, e, 1e-5);
+
+    print_sparce_matrix(A);
+    cout << e <<endl; 
+    return {};
+    /*
 
     //Resuelvo el sistema
     vector<double> ranks = backward_sust2(A);
