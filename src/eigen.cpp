@@ -2,7 +2,7 @@
 #include <chrono>
 #include <iostream>
 #include "eigen.h"
-
+#include "utils.h"
 #define CHECKPIVOT 1;
 using namespace std;
 
@@ -13,38 +13,59 @@ using Eigen::MatrixXd;
 // tipo Double(D)
 using Eigen::VectorXd;
 
-void elim_gauss(SparseMatrix &A, double epsilon)
-{
-	for (int i = 0; i < A.outerSize(); i++)
+void elim_gauss(SparseMatrix &A,  double epsilon){
+	
+	
+	for (int i = 0; i < A.outerSize()-1; i++)
 	{ // Por cada fila pivot
 		double aii = A.coeff(i, i);
+		//cout << "aii " << aii <<endl; 
 		if (abs(aii) > epsilon)
 		{
-			for (int j = i + 1; j < A.innerSize(); j++)
-			{
-				SparseMatrix::InnerIterator it(A, j);
+			for (int j = i + 1; j < A.outerSize(); j++)
+			{ //Recorro cada una de las filas de adentro	
+				SVector filaPivot = A.innerVector(i); 
+				SVector filaJ = A.innerVector(j); 	
+
 				if (abs(A.coeff(j, i)) < epsilon)
 				{
 					continue;
 				}
+				
 				double mji = A.coeff(j, i) / aii;
-				cout << "Mji es " << mji << endl;
+				//cout << "Mji es " << mji << endl;
+
 				// It sobre la fila pivot
-				for (SparseMatrix::InnerIterator itPivot(A, i); itPivot; ++itPivot)
+				SVector::InnerIterator itPivot(filaPivot);
+				SVector::InnerIterator it(filaJ);  
+
+				while (itPivot)
 				{
-					if (itPivot.col() == it.col())
+					/* if(i >= 1){
+						cout << filaJ << endl; 
+						cout << filaPivot <<endl; 
+						cout << "it " << it.value() << " " << it.index() <<endl; 
+						cout << "itPivot " << itPivot.value() << " " << itPivot.index() <<endl;  
+						cout << " pivots" <<endl;
+					} */
+					if (itPivot.index() == it.index())
 					{
-						A.coeffRef(j, it.col()) = it.value() - mji * itPivot.value();
+						A.coeffRef(j, it.index()) = it.value() - mji * itPivot.value();
 						++it;
+						++itPivot;
+					}else if(itPivot.index() > it.index()){
+						++it; 
+						
 					}
-					else if (it || itPivot.col() < it.col())
+					else if (itPivot.index() < it.index() or it )
 					{
-						A.coeffRef(j, itPivot.col()) = -mji * itPivot.value();
+						A.coeffRef(j, itPivot.index()) = -mji * itPivot.value();
+						++itPivot; 
 					}
 				}
 			}
-		}
-		else
+			
+		}else
 		{ // TODO //NO CHEQUEA SI LA COLUMNA ES CERO!!!
 #ifdef CHECKPIVOT
 			bool rompe = false;
@@ -64,7 +85,8 @@ void elim_gauss(SparseMatrix &A, double epsilon)
 			}
 #endif
 		}
-	}
+	} 
+	cout << MatrixXd(A) <<endl; 
 }
 
 /* vector<double> backward_sust2(MatrizRalaCSR &A){

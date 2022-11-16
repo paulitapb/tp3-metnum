@@ -1,0 +1,8 @@
+Instancia 	 	 	 	  	 	 	& n 	 	 & m 	 	 & Tiempo tardado  	 & test_result 	 	 & Error Abs 	 	
+test_15_segundos.txt 	 	 	 	 	 & 2000 	 	 & 12000 	 	 & 531.56371755 seg 	   & 	OK& 	0.00000183
+test_30_segundos.txt 	 	 	 	 	 & 3000 	 	 & 18000 	 	 & 1773.12890248 seg 	   & 	OK& 	0.00000171
+test_aleatorio_desordenado.txt 	 	 & 5 	 	 & 12 	 	 & 0.00012983 seg 	   & 	OK& 	0.00000012
+test_aleatorio.txt 	 	 	 	 	 & 5 	 	 & 12 	 	 & 0.00011041 seg 	   & 	OK& 	0.00002000
+test_completo.txt 	 	 	 	 	 & 5 	 	 & 20 	 	 & 0.00016235 seg 	   & 	OK& 	0.00000000
+test_sin_links.txt 	 	 	 	 	 & 5 	 	 & 0 	 	 & 0.00008818 seg 	   & 	OK& 	0.00000000
+test_trivial.txt 	 	 	 	 	 & 1 	 	 & 0 	 	 & 0.00004472 seg 	   & 	OK& 	0.00000000

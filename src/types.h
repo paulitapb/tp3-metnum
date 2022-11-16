@@ -11,7 +11,7 @@ typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> M
 typedef Eigen::SparseMatrix<double, Eigen::RowMajor> SparseMatrix;
 
 typedef Eigen::VectorXd Vector;
-
+typedef Eigen::SparseVector<double> SVector;
 
 
 typedef Eigen::Triplet<double> T; //to build sparce matrix efficiently

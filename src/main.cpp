@@ -23,17 +23,15 @@ vector<double> page_rank(string test_path, double p)
 
     SparseMatrix W = read_test("test_aleatorio.txt");
 
-    print_sparce_matrix(W);
     int n = W.outerSize();
 
     // armamos  D y una identidad
-    SparseMatrix I(n, n + 1);
+    SparseMatrix I(n, n);
     SparseMatrix D(n, n);
 
     for (int i = 0; i < n; i++)
     {
         I.coeffRef(i, i) = 1;
-        I.coeffRef(i, n) = 1;
         double colSum = W.col(i).sum();
         if (abs(colSum) > epsilon)
         {
@@ -41,35 +39,25 @@ vector<double> page_rank(string test_path, double p)
         }
     }
 
-    print_sparce_matrix(I);
-
-    print_sparce_matrix(D);
-
     // Armamos WD
     SparseMatrix WD(n, n);
     WD = W * D;
 
-    print_sparce_matrix(WD);
 
     // pW
     WD = p * WD;
 
-    print_sparce_matrix(WD);
 
     // A = I-pWD
     SparseMatrix A(n, n);
 
-    // todo QUE ONDA SI CREO LA IDENTIDAD MAS GRANDE Y DESPUES LA RESTO
     A = I - WD;
 
-    // A.resize(n, n+1);
-
-    /* for(int i = 0; i < n ; i++){
-        A.coeffRef(i, n) = 1;
-    }
-     */
-
     print_sparce_matrix(A);
+
+    elim_gauss(A, 1e-5);
+
+    //print_sparce_matrix(A);
     return {};
     /*
     vector<double> e(w.n(), 1);
@@ -130,15 +118,7 @@ vector<double> page_rank(string test_path, double p)
 
 int main()
 {
-    // page_rank("test_aleatorio.txt", 0.9);
-    // SparseMatrix W = read_test("test_aleatorio.txt");
-    // print_sparce_matrix(W);
-
-    Vector v = Vector::Ones(3);
-
-    cout << v(0) << endl;
-    v(0) = 2;
-    cout << v << endl;
+    page_rank("test_aleatorio.txt", 0.9);
 
     return 0;
 }

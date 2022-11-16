@@ -17,7 +17,7 @@ SparseMatrix read_test(string test_name){
 
     for(int i = 0; i < elem_no_nulos; i++){
         entrada >> a >> b; 
-        tripletList.push_back(T(a-1,b-1, 1 ));
+        tripletList.push_back(T(b-1,a-1, 1 ));
         
     }
 
