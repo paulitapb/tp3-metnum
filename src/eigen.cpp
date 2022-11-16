@@ -13,17 +13,10 @@ using Eigen::MatrixXd;
 // tipo Double(D)
 using Eigen::VectorXd;
 
-<<<<<<< HEAD
 void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 	// CAMBIAR COEFFREFF POR ValueRef
 	
 	for (int i = 0; i < A.outerSize()-1; i++)
-=======
-void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
-{
-
-	for (int i = 0; i < A.outerSize() - 1; i++)
->>>>>>> 6b927c8f5268ca7e94ef3035ca8c9348b2a7f468
 	{ // Por cada fila pivot
 		double aii = A.coeff(i, i);
 		// cout << "aii " << aii <<endl;
@@ -56,14 +49,10 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
 						cout << " pivots" <<endl;
 					} */
 					if (itPivot.index() == it.index())
-	{
+					{
 						A.coeffRef(j, it.index()) = it.value() - mji * itPivot.value();
 						++it;
 						++itPivot;
-					}
-					else if (itPivot.index() > it.index())
-					{
-						++it;
 					}
 					else if (itPivot.index() > it.index())
 					{
@@ -99,21 +88,14 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
 	}
 }
 
-<<<<<<< HEAD
 vector<double> backward_sust(SparseMatrix &A, Vector &b){
 	//Falta que tome un vector y que tomo el ultimo valor del vector
 
-=======
-vector<double> backward_sust(SparseMatrix &A)
-{
-	// Falta que tome un vector y que tomo el ultimo valor del vector
->>>>>>> 6b927c8f5268ca7e94ef3035ca8c9348b2a7f468
 	vector<double> res(A.outerSize(), 0);
 
 	for (int i = A.outerSize() - 1; i >= 0; i--)
 	{
 		double suma = 0;
-<<<<<<< HEAD
 		SVector filai = A.innerVector(i);
 		
 		/* if(filai.outerSize() < 2){
@@ -130,28 +112,6 @@ vector<double> backward_sust(SparseMatrix &A)
 		double aii = A.coeff(i, i);
 		res[i]= (b[i] - suma) / aii;
 
-=======
-		SVector filai = A.row(i);
-
-		if (filai.size() < 2)
-		{
-			cout << "Hay una variable libre" << endl;
-			break;
-		}
-
-		int k = 0;
-		for (int j = filai.size() - 1; j >= 0; j--)
-		{
-
-			if (i == filai.coeff(j).first)
-				continue;
-
-			suma += filai(j).second * res[filai(j).first];
-		}
-		double aii = A.coeff(i, i);
-
-		res[i] = (A.coeff(i, A.outerSize() - 1) - suma) / aii;
->>>>>>> 6b927c8f5268ca7e94ef3035ca8c9348b2a7f468
 	}
 	return res;
 }
