@@ -75,6 +75,15 @@ void out_eigvectors(Matrix eigvect, string path){
     }
 }
 
+void normalizar_vector(vector<double> &v){
+    double suma = 0; 
+    for(int i = 0; i< v.size(); i++){
+        suma += fabs(v[i]);  
+    } 
+    for(int i = 0; i< v.size(); i++){
+        v[i] = v[i] / suma;  
+    }
+}
 /* void leer_test(string path){
     ifstream input("../../datasets/ego-facebook.edges");  
     int m = 28048; 

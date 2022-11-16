@@ -14,6 +14,7 @@ using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
 void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
+	// CAMBIAR COEFFREFF POR ValueRef
 	
 	for (int i = 0; i < A.outerSize()-1; i++)
 	{ // Por cada fila pivot
@@ -39,8 +40,7 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 				SVector::InnerIterator itPivot(filaPivot);
 				SVector::InnerIterator it(filaJ);  
 
-				while (itPivot)
-				{
+				while (itPivot){
 					/* if(i >= 1){
 						cout << filaJ << endl; 
 						cout << filaPivot <<endl; 
@@ -49,15 +49,15 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 						cout << " pivots" <<endl;
 					} */
 					if (itPivot.index() == it.index())
-					{
+	{
 						A.coeffRef(j, it.index()) = it.value() - mji * itPivot.value();
 						++it;
 						++itPivot;
-					}else if(itPivot.index() > it.index()){
+					}
+					else if(itPivot.index() > it.index()){
 						++it; 
 					}
-					else if (itPivot.index() < it.index() or it )
-					{
+					else if (itPivot.index() < it.index() or it){
 						A.coeffRef(j, itPivot.index()) = -mji * itPivot.value();
 						++itPivot; 
 					}
@@ -78,8 +78,7 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 					break;
 				}
 			}
-			if (rompe)
-			{
+			if (rompe){
 				break;
 			}
 #endif
@@ -88,30 +87,28 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
  
 }
 
-vector<double> backward_sust(SparseMatrix &A){
+vector<double> backward_sust(SparseMatrix &A, Vector &b){
 	//Falta que tome un vector y que tomo el ultimo valor del vector
+
 	vector<double> res(A.outerSize(), 0);
 
 	for(int i = A.outerSize()-1; i >= 0; i--){
 		double suma = 0;
-		SVector filai = A.row(i);
-
-		if(filai.size() < 2){
+		SVector filai = A.innerVector(i);
+		
+		/* if(filai.outerSize() < 2){
 			cout << "Hay una variable libre" <<endl;
 			break;
-		}
+		} */
 
-		int k = 0;
-		for(int j = filai.size()-1; j >= 0; j--){
-
-			if(i == filai.coeff(j).first) continue;
-
-			suma += filai(j).second * res[filai(j).first];
+		int k = 0;  
+		for(SVector::ReverseInnerIterator itFila(filai); itFila; --itFila){
+			if(i == itFila.index()) continue;
+			suma += itFila.value() * res[itFila.index()];
 
 		}
 		double aii = A.coeff(i, i);
-
-		res[i]= (A.coeff(i, A.outerSiz()-1) - suma) / aii;
+		res[i]= (b[i] - suma) / aii;
 
 	}
 	return res;

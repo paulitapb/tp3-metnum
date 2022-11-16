@@ -24,3 +24,4 @@ Genera un archivo .out con los autovalores
 void out_eigvalues(Vector &eigvals, string path); 
 void out_eigvectors(Matrix eigvect, string path); 
 SparseMatrix read_test(string test_name);
+void normalizar_vector(vector<double> &v); 
