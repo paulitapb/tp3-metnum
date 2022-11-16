@@ -13,39 +13,40 @@ using Eigen::MatrixXd;
 // tipo Double(D)
 using Eigen::VectorXd;
 
-void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
-	
-	for (int i = 0; i < A.outerSize()-1; i++)
+void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
+{
+
+	for (int i = 0; i < A.outerSize() - 1; i++)
 	{ // Por cada fila pivot
 		double aii = A.coeff(i, i);
-		//cout << "aii " << aii <<endl; 
+		// cout << "aii " << aii <<endl;
 		if (abs(aii) > epsilon)
 		{
 			for (int j = i + 1; j < A.outerSize(); j++)
-			{ //Recorro cada una de las filas de adentro
-					
-				SVector filaPivot = A.innerVector(i); 
-				SVector filaJ = A.innerVector(j); 	
+			{ // Recorro cada una de las filas de adentro
+
+				SVector filaPivot = A.innerVector(i);
+				SVector filaJ = A.innerVector(j);
 
 				if (abs(A.coeff(j, i)) < epsilon)
 				{
 					continue;
 				}
-				
+
 				double mji = A.coeff(j, i) / aii;
-				//cout << "Mji es " << mji << endl;
-				v.coeffRef(j) = v.coeffRef(j) - mji*v.coeffRef(i); 
+				// cout << "Mji es " << mji << endl;
+				v.coeffRef(j) = v.coeffRef(j) - mji * v.coeffRef(i);
 				// It sobre la fila pivot
 				SVector::InnerIterator itPivot(filaPivot);
-				SVector::InnerIterator it(filaJ);  
+				SVector::InnerIterator it(filaJ);
 
 				while (itPivot)
 				{
 					/* if(i >= 1){
-						cout << filaJ << endl; 
-						cout << filaPivot <<endl; 
-						cout << "it " << it.value() << " " << it.index() <<endl; 
-						cout << "itPivot " << itPivot.value() << " " << itPivot.index() <<endl;  
+						cout << filaJ << endl;
+						cout << filaPivot <<endl;
+						cout << "it " << it.value() << " " << it.index() <<endl;
+						cout << "itPivot " << itPivot.value() << " " << itPivot.index() <<endl;
 						cout << " pivots" <<endl;
 					} */
 					if (itPivot.index() == it.index())
@@ -53,18 +54,24 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 						A.coeffRef(j, it.index()) = it.value() - mji * itPivot.value();
 						++it;
 						++itPivot;
-					}else if(itPivot.index() > it.index()){
-						++it; 
 					}
-					else if (itPivot.index() < it.index() or it )
+					else if (itPivot.index() > it.index())
+					{
+						++it;
+					}
+					else if (itPivot.index() > it.index())
+					{
+						++it;
+					}
+					else if (itPivot.index() < it.index() or it)
 					{
 						A.coeffRef(j, itPivot.index()) = -mji * itPivot.value();
-						++itPivot; 
+						++itPivot;
 					}
 				}
 			}
-			
-		}else
+		}
+		else
 		{ // TODO //NO CHEQUEA SI LA COLUMNA ES CERO!!!
 #ifdef CHECKPIVOT
 			bool rompe = false;
@@ -84,41 +91,45 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 			}
 #endif
 		}
-	} 
- 
+	}
 }
 
-vector<double> backward_sust(SparseMatrix &A){
-	//Falta que tome un vector y que tomo el ultimo valor del vector
+vector<double> backward_sust(SparseMatrix &A)
+{
+	// Falta que tome un vector y que tomo el ultimo valor del vector
 	vector<double> res(A.outerSize(), 0);
 
-	for(int i = A.outerSize()-1; i >= 0; i--){
+	for (int i = A.outerSize() - 1; i >= 0; i--)
+	{
 		double suma = 0;
 		SVector filai = A.row(i);
 
-		if(filai.size() < 2){
-			cout << "Hay una variable libre" <<endl;
+		if (filai.size() < 2)
+		{
+			cout << "Hay una variable libre" << endl;
 			break;
 		}
 
 		int k = 0;
-		for(int j = filai.size()-1; j >= 0; j--){
+		for (int j = filai.size() - 1; j >= 0; j--)
+		{
 
-			if(i == filai.coeff(j).first) continue;
+			if (i == filai.coeff(j).first)
+				continue;
 
 			suma += filai(j).second * res[filai(j).first];
-
 		}
 		double aii = A.coeff(i, i);
 
-		res[i]= (A.coeff(i, A.outerSiz()-1) - suma) / aii;
-
+		res[i] = (A.coeff(i, A.outerSize() - 1) - suma) / aii;
 	}
 	return res;
 }
 
-double jacobiSum(Vector x, SparseMatrix &A, int i)
+double iterativeSum(Vector x, SparseMatrix &A, int i)
 {
+	// como el x va a tener actualizadas las posiciones hasta i-1 y las siguientes van a ser de la iteracion anterior (GS),
+	// la suma es la misma para gauss-seidel y jacobi, nada mas que a uno le paso el vector que estoy actualizando y al otro el previo
 	double sum = 0;
 	for (int j = 0; j < x.size(); j++)
 	{
@@ -134,12 +145,30 @@ Vector jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 {
 	Vector prev = Vector::Ones(x.size());
 	int iter = 0;
-	while (abs(prev(0) - x(0)) >= epsilon || iter < k)
+	while (abs(prev(0) - x(0)) > epsilon || iter < k)
 	{
 		prev = x;
 		for (int i = 0; i < x.size(); i++)
 		{
-			x(i) = (b(i) - jacobiSum(prev, A, i)) / A.coeff(i, i);
+			x(i) = (b(i) - iterativeSum(prev, A, i)) / A.coeff(i, i);
+		}
+		iter++;
+	}
+	return x;
+}
+
+Vector gauss_seidel(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
+{
+	// el vector previous no lo necesito mas como vector porque no lo voy a recorrer nunca
+	// lo unico que quizas puede ser que pase es que queramos comparar todo el vector previo con el ultimo x
+	double prev = 1;
+	int iter = 0;
+	while (abs(prev - x(0)) > epsilon || iter < k)
+	{
+		prev = x(0);
+		for (int i = 0; i < x.size(); i++)
+		{
+			x(i) = (b(i) - iterativeSum(x, A, i)) / A.coeff(i, i);
 		}
 		iter++;
 	}
