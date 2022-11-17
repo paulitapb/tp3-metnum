@@ -29,6 +29,7 @@ SparseMatrix read_test(string test_name){
 void print_sparce_matrix(SparseMatrix &m){
     cout<< MatrixXd(m) <<endl;
 }
+
 void print_vector(vector<double> const &v){
     for(int i = 0; i< v.size(); i++){
         cout << v[i] << " " ; 
@@ -76,14 +77,17 @@ void out_eigvectors(Matrix eigvect, string path){
 }
 
 void normalizar_vector(Vector &v){
+
     double suma = 0; 
-    for(int i = 0; i< v.size(); i++){
+    for(int i = 0; i < v.size(); i++){
         suma += fabs(v(i));  
     } 
     for(int i = 0; i< v.size(); i++){
         v(i) = v(i) / suma;  
     }
+
 }
+
 /* void leer_test(string path){
     ifstream input("../../datasets/ego-facebook.edges");  
     int m = 28048; 

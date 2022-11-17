@@ -1,7 +1,8 @@
 #include <iostream>
 
-#include "types.h"
+//#include "types.h"
 #include "utils.h"
+
 #include "eigen.h"
 #include <chrono>
 
@@ -42,7 +43,6 @@ void armarMatrizA(string test_path, SparseMatrix &W, SparseMatrix &A, double p){
     WD = p * WD;
 
     // A = I-pWD
-    SparseMatrix A(n, n);
 
     A = I - WD;
 }
@@ -55,7 +55,7 @@ Vector page_rank_EG(string test_path, double p){
     SparseMatrix A(n, n);
 
     armarMatrizA(test_path, W, A, p); 
-    
+
     Vector e = Vector::Ones(n);
 
     //Triangulamos el sistema
@@ -66,7 +66,6 @@ Vector page_rank_EG(string test_path, double p){
 
     //Normalizo la solucion
     normalizar_vector(ranks);
-
 
     return ranks; 
 }
@@ -89,8 +88,7 @@ Vector page_rank_Jacobi(string test_path, double p){
 
     //Normalizo la solucion
     normalizar_vector(ranks);
-
-
+    cout << ranks <<endl; 
     return ranks; 
 }
 
@@ -113,6 +111,7 @@ Vector page_rank_GS(string test_path, double p){
     //Normalizo la solucion
     normalizar_vector(ranks);
 
+    cout << ranks <<endl; 
     return ranks; 
 }
 
@@ -149,10 +148,12 @@ void correr_test_catedra(){
     
     int i = 0;
     for (string test : tests) {
+
         i++;
         if(i <= 2){
             continue;
         }
+
         cout << "corriendo test "  << test << " con p " << p[i-1] <<endl;
         
         //Medir tiempos 
@@ -160,7 +161,8 @@ void correr_test_catedra(){
 
         //Calculo de rankings   
         Vector puntajes_finales = page_rank_EG(test, p[i-1]); 
-        
+
+        //Vector puntajes_finales = page_rank_Jacobi(test, p[i-1]); 
         auto final = chrono::high_resolution_clock::now();
         chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
         
@@ -186,6 +188,5 @@ void correr_test_catedra(){
 
 int main(){
     correr_test_catedra(); 
-
     return 0;
 }

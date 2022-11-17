@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <chrono>
 #include <iostream>
+
 #include "eigen.h"
 
 #define CHECKPIVOT 1;
@@ -28,11 +29,10 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 				SVector filaPivot = A.innerVector(i);
 				SVector filaJ = A.innerVector(j);
 
-				if (abs(A.coeff(j, i)) < epsilon)
-				{
+				if (abs(A.coeff(j, i)) < epsilon){
 					continue;
 				}
-
+				
 				double mji = A.coeff(j, i) / aii;
 				// cout << "Mji es " << mji << endl;
 				v.coeffRef(j) = v.coeffRef(j) - mji * v.coeffRef(i);
@@ -91,17 +91,12 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 Vector backward_sust(SparseMatrix &A, Vector &b){
 	//Falta que tome un vector y que tomo el ultimo valor del vector
 
-	Vector res(A.outerSize(), 0);
+	Vector res = Vector::Zero(A.outerSize());
 
 	for (int i = A.outerSize() - 1; i >= 0; i--)
 	{
 		double suma = 0;
 		SVector filai = A.innerVector(i);
-		
-		/* if(filai.outerSize() < 2){
-			cout << "Hay una variable libre" <<endl;
-			break;
-		} */
 
 		int k = 0;  
 		for(SVector::ReverseInnerIterator itFila(filai); itFila; --itFila){
