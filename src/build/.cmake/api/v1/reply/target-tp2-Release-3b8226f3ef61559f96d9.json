@@ -35,13 +35,21 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -Wall -I ../ -I /usr/include/python3.8  -O3 -O3 -DNDEBUG  "
+					"fragment" : " -Wall -I ../ -I /usr/include/python3.8  -O3 -O3 -DNDEBUG"
 				},
 				{
 					"fragment" : "-std=gnu++11"
 				}
 			],
 			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "11"
+			},
 			"sourceIndexes" : 
 			[
 				0,
