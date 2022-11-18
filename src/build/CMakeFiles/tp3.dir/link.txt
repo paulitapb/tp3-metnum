@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -I ../ -I /usr/include/python3.8  -O3 -O3 -DNDEBUG -rdynamic CMakeFiles/tp3.dir/main.cpp.o CMakeFiles/tp3.dir/utils.cpp.o CMakeFiles/tp3.dir/eigen.cpp.o -o tp3 
