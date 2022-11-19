@@ -149,7 +149,7 @@ pair<bool, double> resultados_tests(string res_path, Vector const &v){
 }
 
 
-void correr_test_catedra(){
+void correr_test_catedra(int reps){
  
     string output_path = "tests/med_tiempo.txt"; 
     //archivo de salida que me da el resultado de los test 
@@ -158,45 +158,46 @@ void correr_test_catedra(){
     
     int i = 0;
     for (string test : tests) {
+        for(int i = 0; i < reps; i++){
+            i++;
+            if(i <= 2){
+                continue;
+            }
 
-        i++;
-        if(i <= 2){
-            continue;
+            cout << "corriendo test "  << test << " con p " << p[i-1] <<endl;
+            
+            //Medir tiempos 
+            auto inicio = chrono::high_resolution_clock::now();
+
+            //Calculo de rankings   
+            Vector puntajes_finales = page_rank_EG("tests/" + test, p[i-1]); 
+
+            //Vector puntajes_finales = page_rank_Jacobi(test, p[i-1]); 
+            auto final = chrono::high_resolution_clock::now();
+            chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
+            
+            string res_path = test + ".out";  
+            
+            pair<bool, double> res_test = resultados_tests(res_path, puntajes_finales); 
+
+            string archivo = "tests/" + test;
+            ifstream entrada(archivo);
+            int n,m;
+            entrada >> n >> m;
+            if(test == "test_aleatorio_desordenado.txt"){
+                archivo_salida << "" << test << " \t \t & " << n << " \t \t & "  << m << " \t \t & ";
+            }else{
+                archivo_salida << "" << test << " \t \t \t \t \t & " << n << " \t \t & "  << m << " \t \t & ";
+            }
+            archivo_salida << fixed << setprecision(8) << tiempo_ejecucion1.count() / 1000 << " seg \t   & \t" 
+            << res_output[res_test.first] << "& \t" << res_test.second <<endl;
         }
-
-        cout << "corriendo test "  << test << " con p " << p[i-1] <<endl;
-        
-        //Medir tiempos 
-        auto inicio = chrono::high_resolution_clock::now();
-
-        //Calculo de rankings   
-        Vector puntajes_finales = page_rank_EG("tests/" + test, p[i-1]); 
-
-        //Vector puntajes_finales = page_rank_Jacobi(test, p[i-1]); 
-        auto final = chrono::high_resolution_clock::now();
-        chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
-        
-        string res_path = test + ".out";  
-         
-        pair<bool, double> res_test = resultados_tests(res_path, puntajes_finales); 
-
-        string archivo = "tests/" + test;
-        ifstream entrada(archivo);
-        int n,m;
-        entrada >> n >> m;
-        if(test == "test_aleatorio_desordenado.txt"){
-            archivo_salida << "" << test << " \t \t & " << n << " \t \t & "  << m << " \t \t & ";
-        }else{
-            archivo_salida << "" << test << " \t \t \t \t \t & " << n << " \t \t & "  << m << " \t \t & ";
-        }
-        archivo_salida << fixed << setprecision(8) << tiempo_ejecucion1.count() / 1000 << " seg \t   & \t" 
-        << res_output[res_test.first] << "& \t" << res_test.second <<endl;
     }
     archivo_salida.close();
 }
 
-void correr_test_nuestros(){
- 
+void correr_test_nuestros(int reps){
+
     string output_path = "test_nuestros/med_tiempo.txt"; 
     //archivo de salida que me da el resultado de los test 
     ofstream archivo_salida(output_path);
@@ -205,40 +206,45 @@ void correr_test_nuestros(){
     int i = 0;
 
     for (string test : tests_implementaciones) {
-    
-        cout << "corriendo test "  << test << " con p " << p <<endl;
-        
-        //Medir tiempos 
-        auto inicio = chrono::high_resolution_clock::now();
+        for(int i = 0; i < reps; i++){
 
-        //Calculo de rankings   
-        Vector puntajes_finales = page_rank_EG("test_nuestros/" + test, p); 
+            cout << "corriendo test "  << test << " con p " << p <<endl;
+            
+            //Medir tiempos 
+            auto inicio = chrono::high_resolution_clock::now();
 
-        //Vector puntajes_finales = page_rank_Jacobi(test, p[i-1]); 
-        auto final = chrono::high_resolution_clock::now();
-        chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
-        
-        string res_path = test + ".out";  
-         
-        //pair<bool, double> res_test = resultados_tests(res_path, puntajes_finales); 
+            //Calculo de rankings   
+            Vector puntajes_finales = page_rank_EG("test_nuestros/" + test, p); 
 
-        string archivo = "test_nuestros/" + test;
-        ifstream entrada(archivo);
-        int n,m;
-        entrada >> n >> m;
-        if(test == "test_aleatorio_desordenado.txt"){
-            archivo_salida << "" << test << " \t \t & " << n << " \t \t & "  << m << " \t \t & ";
-        }else{
-            archivo_salida << "" << test << " \t \t \t \t \t & " << n << " \t \t & "  << m << " \t \t & ";
+            //Vector puntajes_finales = page_rank_Jacobi("test_nuestros/" + test, p); 
+            auto final = chrono::high_resolution_clock::now();
+
+            chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
+            
+            string res_path = test + ".out";  
+            
+            //pair<bool, double> res_test = resultados_tests(res_path, puntajes_finales); 
+
+            string archivo = "test_nuestros/" + test;
+            ifstream entrada(archivo);
+            int n,m;
+            entrada >> n >> m;
+
+            if(test == "test_aleatorio_desordenado.txt"){
+                archivo_salida << "" << test << " \t \t & " << n << " \t \t & "  << m << " \t \t & ";
+            }else{
+                archivo_salida << "" << test << " \t \t \t \t \t & " << n << " \t \t & "  << m << " \t \t & ";
+            }
+            
+            archivo_salida << fixed << setprecision(8) << tiempo_ejecucion1.count() / 1000 << " seg \t   & \t" <<endl; 
+            //<< res_output[res_test.first] << "& \t" << res_test.second <<endl;
         }
-        archivo_salida << fixed << setprecision(8) << tiempo_ejecucion1.count() / 1000 << " seg \t   & \t" <<endl; 
-        //<< res_output[res_test.first] << "& \t" << res_test.second <<endl;
     }
     archivo_salida.close();
 }
 
 int main(){
     //correr_test_catedra(); 
-    correr_test_nuestros();
+    correr_test_nuestros(10);
     return 0;
 }
