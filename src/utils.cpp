@@ -1,7 +1,7 @@
 #include "utils.h"
 
 SparseMatrix read_test(string test_name){
-    string archivo =  "tests/" + test_name;
+    string archivo =  test_name;
 
     ifstream entrada(archivo);
 
