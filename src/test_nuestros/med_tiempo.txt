@@ -1,7 +1,0 @@
-Instancia 	 	 	 	  	 	 	& n 	 	 & m 	 	 & Tiempo tardado  	 & test_result 	 	 & Error Abs 	 	
-test_supernodo_10.txt 	 	 	 	 	 & 10 	 	 & 9 	 	 & 0.00025312 seg 	   & 	
-test_supernodo_20.txt 	 	 	 	 	 & 20 	 	 & 19 	 	 & 0.00541561 seg 	   & 	
-test_supernodo_50.txt 	 	 	 	 	 & 50 	 	 & 49 	 	 & 0.00082193 seg 	   & 	
-test_antisupernodo_10.txt 	 	 	 	 	 & 10 	 	 & 9 	 	 & 0.00007456 seg 	   & 	
-test_antisupernodo_20.txt 	 	 	 	 	 & 20 	 	 & 19 	 	 & 0.00013835 seg 	   & 	
-test_antisupernodo_50.txt 	 	 	 	 	 & 50 	 	 & 49 	 	 & 0.00060871 seg 	   & 	
