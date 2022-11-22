@@ -11,6 +11,11 @@
 #include "types.h"
 
 
+SparseMatrix read_matrix_karate(); 
+SparseMatrix read_ego_facebook();
+
+//SparseMatrix read_test();
+
 void print_sparce_matrix(SparseMatrix &m);  
 void print_vector(vector<double> const &v);
 
@@ -22,11 +27,6 @@ void out_eigvectors(Matrix eigvect, string path);
 
 // Lee los test de la catedra  
 SparseMatrix read_test(string test_name);
-//Compara los test de la catedra con los .out
-pair<bool, double> resultados_tests(string res_path, Vector const &v);
-
-void write_time_results(string res_path, vector<double> tiempos);
 
 //normaliza el vector
 void normalizar_vector(Vector &v); 
-
