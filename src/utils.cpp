@@ -88,21 +88,35 @@ void normalizar_vector(Vector &v){
 
 }
 
-/* void leer_test(string path){
-    ifstream input("../../datasets/ego-facebook.edges");  
-    int m = 28048; 
-    int n = 3436; 
+pair<bool, double> resultados_tests(string res_path, Vector const &v){
+    string archivo = "tests/" + res_path;
+    string archivo_out = "test_out/" + res_path;  
+    ifstream entrada(archivo);
+    ofstream salida(archivo_out); 
+    double p;  
+    entrada >> p;
+    salida << p << endl; 
+    vector<double> res(v.size(), 0);
+    bool paso_test = true; 
+    double suma_error = 0; 
+    for(int i = 0; i< v.size();i++){
+        entrada >> res[i];  
+        salida << fixed << setprecision(4) << v(i) <<endl; 
 
-    std::vector<T> tripletList;
-    tripletList.reserve(m);
-
-    for(int i = 0; i < m; i++){
-        double a, b;
-        input >> a >> b; 
-        tripletList.push_back(T(a-1,b-1,1));
+        suma_error += fabs(v(i)-res[i]); 
+        if(fabs(v(i)-res[i]) > 0.0001){
+            paso_test &= false; 
+        }
     }
+    return make_pair(paso_test, suma_error/v.size()); 
+}
 
-    SparseMatrix mat_ego_face(n, n);
-    mat_ego_face.setFromTriplets(tripletList.begin(), tripletList.end());
-    return mat_ego_face; 
-} */
+void write_time_results(string res_path, vector<double> tiempos){
+    string archivo_out = res_path; 
+    ofstream salida(archivo_out);  
+
+    for(int i = 0; i< tiempos.size() ;i++){
+        salida << fixed << setprecision(8) << tiempos[i] <<endl; 
+    }
+    salida.close(); 
+}
