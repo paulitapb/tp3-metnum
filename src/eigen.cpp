@@ -151,7 +151,7 @@ Vector jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 		}
 		iter++;
 	}
-	cout << iter <<endl;
+	//cout << iter <<endl;
 	return x;
 }
 
@@ -170,7 +170,7 @@ Vector gauss_seidel(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 		}
 		iter++;
 	}
-	cout << iter <<endl;
+	//cout << iter <<endl;
 	return x;
 }
 
