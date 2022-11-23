@@ -196,15 +196,15 @@ void correr_test_catedra_experimentacion(int reps)
             auto inicio = chrono::high_resolution_clock::now();
 
             // Calculo de rankings
-            Vector puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
-            // Vector puntajes_finales = page_rank_Jacobi(test, p[i-1]);
+            //Vector puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
+            Vector puntajes_finales = page_rank_GS("tests/" + test, p[i-1]);
 
             auto final = chrono::high_resolution_clock::now();
             chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
 
             tiempos[j] = tiempo_ejecucion1.count();
         }
-        std::string res_out = (string) "tiempos_exp/" + test + ".exp";
+        std::string res_out = (string) "tiempos_exp/" + test + "GS" + ".exp";
 
         write_time_results(res_out, tiempos);
     }
@@ -279,14 +279,14 @@ void correr_test_nuestros_experimentacion(int reps)
 
             // Calculo de rankings
             Vector puntajes_finales = page_rank_EG("test_nuestros/" + test, p);
-            // Vector puntajes_finales = page_rank_Jacobi(test, p[i-1]);
+            //Vector puntajes_finales = page_rank_GS("test_nuestros/" + test, p);
 
             auto final = chrono::high_resolution_clock::now();
             chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
 
             tiempos[j] = tiempo_ejecucion1.count();
         }
-        std::string res_out = (string) "tiempos_exp/" + test + ".exp";
+        std::string res_out = (string) "tiempos_exp/" + test + "EG" + ".exp";
 
         write_time_results(res_out, tiempos);
     }
@@ -294,9 +294,9 @@ void correr_test_nuestros_experimentacion(int reps)
 
 int main()
 {
-    correr_test_catedra();
-    // correr_test_catedra_experimentacion(10);
-    // correr_test_nuestros_experimentacion(10);
+    //correr_test_catedra();
+    correr_test_catedra_experimentacion(1000);
+    //correr_test_nuestros_experimentacion(1000);
 
     return 0;
 }

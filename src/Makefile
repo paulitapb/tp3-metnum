@@ -26,4 +26,4 @@ utils_cpp.o: utils.cpp utils.h types.h
 
 clean:
 	rm -f *.o
-	rm -f tp2
+	rm -f tp3
