@@ -19,15 +19,21 @@ vector<string> tests = {"test_15_segundos.txt",
 vector<string> tests_implementaciones = {
     "test_supernodo_10.txt",
     "test_supernodo_20.txt",
+    "test_supernodo_30.txt",
+    "test_supernodo_40.txt",
     "test_supernodo_50.txt",
 
     "test_antisupernodo_10.txt",
     "test_antisupernodo_20.txt",
+    "test_antisupernodo_30.txt",
+    "test_antisupernodo_40.txt",
     "test_antisupernodo_50.txt", 
 
     "clique10.txt", 
-    "clique20.txt", 
-    "clique50.txt", 
+    "clique20.txt",
+    "clique30.txt", 
+    "clique40.txt", 
+    "clique50.txt"
     
     "binomial_graph100_1.txt", 
     "binomial_graph100_2.txt"};
