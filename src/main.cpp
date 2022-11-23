@@ -27,7 +27,10 @@ vector<string> tests_implementaciones = {
 
     "clique10.txt", 
     "clique20.txt", 
-    "clique50.txt"};
+    "clique50.txt", 
+    
+    "binomial_graph100_1.txt", 
+    "binomial_graph100_2.txt"};
 
 vector<double> p = {0.9, 0.8, 0.76, 0.85, 0.5, 0.64, 0.3};
 
@@ -283,14 +286,14 @@ void correr_test_nuestros_experimentacion(int reps)
 
             // Calculo de rankings
             //Vector puntajes_finales = page_rank_EG("test_nuestros/" + test, p);
-            Vector puntajes_finales = page_rank_Jacobi("test_nuestros/" + test, p);
+            Vector puntajes_finales = page_rank_GS("test_nuestros/" + test, p);
 
             auto final = chrono::high_resolution_clock::now();
             chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
 
             tiempos[j] = tiempo_ejecucion1.count();
         }
-        std::string res_out = (string) "tiempos_exp/" + test + "Jac" + ".exp";
+        std::string res_out = (string) "tiempos_exp/" + test + "GS" + ".exp";
 
         write_time_results(res_out, tiempos);
     }
@@ -298,9 +301,9 @@ void correr_test_nuestros_experimentacion(int reps)
 
 int main()
 {
-    correr_test_catedra();
+    //correr_test_catedra();
     //correr_test_catedra_experimentacion(1000);
-    //correr_test_nuestros_experimentacion(1000);
+    correr_test_nuestros_experimentacion(1000);
 
     return 0;
 }
