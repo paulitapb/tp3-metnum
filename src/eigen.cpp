@@ -14,10 +14,11 @@ using Eigen::MatrixXd;
 // tipo Double(D)
 using Eigen::VectorXd;
 
-void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
+void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
+{
 	// CAMBIAR COEFFREFF POR ValueRef
-	
-	for (int i = 0; i < A.outerSize()-1; i++)
+
+	for (int i = 0; i < A.outerSize() - 1; i++)
 	{ // Por cada fila pivot
 		double aii = A.coeff(i, i);
 		// cout << "aii " << aii <<endl;
@@ -29,10 +30,11 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 				SVector filaPivot = A.innerVector(i);
 				SVector filaJ = A.innerVector(j);
 
-				if (abs(A.coeff(j, i)) < epsilon){
+				if (abs(A.coeff(j, i)) < epsilon)
+				{
 					continue;
 				}
-				
+
 				double mji = A.coeff(j, i) / aii;
 				// cout << "Mji es " << mji << endl;
 				v.coeffRef(j) = v.coeffRef(j) - mji * v.coeffRef(i);
@@ -40,7 +42,8 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 				SVector::InnerIterator itPivot(filaPivot);
 				SVector::InnerIterator it(filaJ);
 
-				while (itPivot){
+				while (itPivot)
+				{
 					/* if(i >= 1){
 						cout << filaJ << endl;
 						cout << filaPivot <<endl;
@@ -80,7 +83,8 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 					break;
 				}
 			}
-			if (rompe){
+			if (rompe)
+			{
 				break;
 			}
 #endif
@@ -88,8 +92,9 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon){
 	}
 }
 
-Vector backward_sust(SparseMatrix &A, Vector &b){
-	//Falta que tome un vector y que tomo el ultimo valor del vector
+Vector backward_sust(SparseMatrix &A, Vector &b)
+{
+	// Falta que tome un vector y que tomo el ultimo valor del vector
 
 	Vector res = Vector::Zero(A.outerSize());
 
@@ -98,15 +103,15 @@ Vector backward_sust(SparseMatrix &A, Vector &b){
 		double suma = 0;
 		SVector filai = A.innerVector(i);
 
-		int k = 0;  
-		for(SVector::ReverseInnerIterator itFila(filai); itFila; --itFila){
-			if(i == itFila.index()) continue;
+		int k = 0;
+		for (SVector::ReverseInnerIterator itFila(filai); itFila; --itFila)
+		{
+			if (i == itFila.index())
+				continue;
 			suma += itFila.value() * res(itFila.index());
-
 		}
 		double aii = A.coeff(i, i);
-		res(i)= (b[i] - suma) / aii;
-
+		res(i) = (b[i] - suma) / aii;
 	}
 	return res;
 }
@@ -126,11 +131,25 @@ double iterativeSum(Vector x, SparseMatrix &A, int i)
 	return sum;
 }
 
+bool areEqual(Vector x1, Vector x2, double e)
+{
+	if (x1.size() != x2.size())
+		return false;
+	for (int i = 0; i < x1.size(); i++)
+	{
+		if (abs(x1(i) - x2(i)) > e)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 Vector jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 {
-	Vector prev = Vector::Ones(x.size());
+	Vector prev = x + Vector::Ones(x.size());
 	int iter = 0;
-	while (abs(prev(0) - x(0)) > epsilon || iter < k)
+	while (!areEqual(prev, x, epsilon) && iter < k)
 	{
 		prev = x;
 		for (int i = 0; i < x.size(); i++)
@@ -146,11 +165,11 @@ Vector gauss_seidel(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 {
 	// el vector previous no lo necesito mas como vector porque no lo voy a recorrer nunca
 	// lo unico que quizas puede ser que pase es que queramos comparar todo el vector previo con el ultimo x
-	double prev = 1;
+	Vector prev = x + Vector::Ones(x.size());
 	int iter = 0;
-	while (abs(prev - x(0)) > epsilon || iter < k)
+	while (!areEqual(prev, x, epsilon) && iter < k)
 	{
-		prev = x(0);
+		prev = x;
 		for (int i = 0; i < x.size(); i++)
 		{
 			x(i) = (b(i) - iterativeSum(x, A, i)) / A.coeff(i, i);

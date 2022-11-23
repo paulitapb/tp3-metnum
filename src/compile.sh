@@ -1,8 +1,7 @@
 #!/bin/bash
 
-cd build
-rm -rf *
+rm -rf *.o
 cmake -DPYTHON_EXECUTABLE="$(which python3)" -DCMAKE_BUILD_TYPE=Release ..
 make
-mv ?*.so ../
-mv tp2 ../
+echo "FINISHED COMPILATION"
+echo "Run ./tp3 to run tests"
