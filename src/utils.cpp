@@ -101,10 +101,10 @@ pair<bool, double> resultados_tests(string res_path, Vector const &v){
     double suma_error = 0; 
     for(int i = 0; i< v.size();i++){
         entrada >> res[i];  
-        salida << fixed << setprecision(4) << v(i) <<endl; 
+        salida << fixed << setprecision(6) << v(i) <<endl; 
 
         suma_error += fabs(v(i)-res[i]); 
-        if(fabs(v(i)-res[i]) > 0.0001){
+        if(fabs(v(i)-res[i]) < 1e-5){
             paso_test &= false; 
         }
     }

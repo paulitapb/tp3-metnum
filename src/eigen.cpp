@@ -21,7 +21,7 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
 	for (int i = 0; i < A.outerSize() - 1; i++)
 	{ // Por cada fila pivot
 		double aii = A.coeff(i, i);
-		// cout << "aii " << aii <<endl;
+		
 		if (abs(aii) > epsilon)
 		{
 			for (int j = i + 1; j < A.outerSize(); j++)
@@ -44,13 +44,6 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
 
 				while (itPivot)
 				{
-					/* if(i >= 1){
-						cout << filaJ << endl;
-						cout << filaPivot <<endl;
-						cout << "it " << it.value() << " " << it.index() <<endl;
-						cout << "itPivot " << itPivot.value() << " " << itPivot.index() <<endl;
-						cout << " pivots" <<endl;
-					} */
 					if (itPivot.index() == it.index())
 					{
 						A.coeffRef(j, it.index()) = it.value() - mji * itPivot.value();
@@ -158,6 +151,7 @@ Vector jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 		}
 		iter++;
 	}
+	cout << iter <<endl;
 	return x;
 }
 
@@ -176,6 +170,7 @@ Vector gauss_seidel(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 		}
 		iter++;
 	}
+	cout << iter <<endl;
 	return x;
 }
 
