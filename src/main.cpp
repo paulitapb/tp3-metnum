@@ -40,8 +40,14 @@ vector<string> tests_implementaciones = {
     "binomial_graph50_3.txt",
     "binomial_graph50_4.txt",
     "binomial_graph50_5.txt",
-    "binomial_graph50_6.txt",
-    "binomial_graph50_8.txt"};
+    "binomial_graph50_6.txt", 
+    "binomial_graph50_8.txt",
+    
+    "density50_10.txt",
+    "density50_20.txt",
+    "density50_30.txt",
+    "density50_40.txt",
+    "density50_50.txt"};
 
 vector<double> p = {0.9, 0.8, 0.76, 0.85, 0.5, 0.64, 0.3};
 
@@ -110,10 +116,8 @@ Vector page_rank_Jacobi(string test_path, double p)
 
     Vector xo = Vector::Ones(n);
 
-    Vector v = jacobi(xo, xo, A, 10000, epsilon);
-
     // Triangulamos el sistema
-    Vector ranks;
+    Vector ranks= jacobi(xo, xo, A, 10000, epsilon);
 
     // Normalizo la solucion
     normalizar_vector(ranks);
@@ -133,10 +137,8 @@ Vector page_rank_GS(string test_path, double p)
 
     Vector xo = Vector::Ones(n);
 
-    Vector v = gauss_seidel(xo, xo, A, 10000, epsilon);
-
     // Triangulamos el sistema
-    Vector ranks;
+    Vector ranks = gauss_seidel(xo, xo, A, 10000, epsilon);
 
     // Normalizo la solucion
     normalizar_vector(ranks);
@@ -228,10 +230,10 @@ void correr_test_catedra_experimentacion(int reps)
     }
 }
 
-void correr_test_nuestros(int reps)
+void correr_test_nuestros()
 {
 
-    string output_path = "test_nuestros/med_tiempo.txt";
+    string output_path = "test_nuestros/med_tiempoEG.txt";
     // archivo de salida que me da el resultado de los test
     ofstream archivo_salida(output_path);
     archivo_salida << "Instancia \t \t \t \t  \t \t \t& n \t \t & m \t \t & Tiempo tardado  \t & test_result \t \t & Error Abs \t \t" << endl;
@@ -240,43 +242,30 @@ void correr_test_nuestros(int reps)
 
     for (string test : tests_implementaciones)
     {
-        for (int i = 0; i < reps; i++)
-        {
+        cout << "corriendo test " << test << " con p " << p << endl;
 
-            cout << "corriendo test " << test << " con p " << p << endl;
+        // Medir tiempos
+        auto inicio = chrono::high_resolution_clock::now();
 
-            // Medir tiempos
-            auto inicio = chrono::high_resolution_clock::now();
+        // Calculo de rankings
+        Vector puntajes_finales = page_rank_EG("test_nuestros/" + test, p);
 
-            // Calculo de rankings
-            Vector puntajes_finales = page_rank_EG("test_nuestros/" + test, p);
+        // Vector puntajes_finales = page_rank_Jacobi("test_nuestros/" + test, p);
+        auto final = chrono::high_resolution_clock::now();
 
-            // Vector puntajes_finales = page_rank_Jacobi("test_nuestros/" + test, p);
-            auto final = chrono::high_resolution_clock::now();
+        chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
 
-            chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
+        string res_path = test + ".out";
 
-            string res_path = test + ".out";
+        // pair<bool, double> res_test = resultados_tests(res_path, puntajes_finales);
 
-            // pair<bool, double> res_test = resultados_tests(res_path, puntajes_finales);
+        string archivo = "test_nuestros/" + test;
+        ifstream entrada(archivo);
+        int n, m;
+        entrada >> n >> m;
 
-            string archivo = "test_nuestros/" + test;
-            ifstream entrada(archivo);
-            int n, m;
-            entrada >> n >> m;
-
-            if (test == "test_aleatorio_desordenado.txt")
-            {
-                archivo_salida << "" << test << " \t \t & " << n << " \t \t & " << m << " \t \t & ";
-            }
-            else
-            {
-                archivo_salida << "" << test << " \t \t \t \t \t & " << n << " \t \t & " << m << " \t \t & ";
-            }
-
-            archivo_salida << fixed << setprecision(8) << tiempo_ejecucion1.count() / 1000 << " seg \t   & \t" << endl;
-            //<< res_output[res_test.first] << "& \t" << res_test.second <<endl;
-        }
+        archivo_salida << fixed << setprecision(8) << tiempo_ejecucion1.count() / 1000 << " seg \t   & \t" << endl;
+        //<< res_output[res_test.first] << "& \t" << res_test.second <<endl;
     }
     archivo_salida.close();
 }
@@ -298,20 +287,24 @@ void correr_test_nuestros_experimentacion(int reps)
             auto inicio = chrono::high_resolution_clock::now();
             // Calculo de rankings
             Vector puntajes_finalesEG = page_rank_EG("test_nuestros/" + test, p);
+            
             auto final = chrono::high_resolution_clock::now();
             chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
+            
             tiemposEG[j] = tiempo_ejecucion1.count();
 
             inicio = chrono::high_resolution_clock::now();
             Vector puntajes_finalesJac = page_rank_Jacobi("test_nuestros/" + test, p);
             final = chrono::high_resolution_clock::now();
             tiempo_ejecucion1 = final - inicio;
+            
             tiemposJac[j] = tiempo_ejecucion1.count();
 
             inicio = chrono::high_resolution_clock::now();
             Vector puntajes_finalesGS = page_rank_GS("test_nuestros/" + test, p);
             final = chrono::high_resolution_clock::now();
             tiempo_ejecucion1 = final - inicio;
+            
             tiemposGS[j] = tiempo_ejecucion1.count();
         }
         write_time_results((string) "tiempos_exp/" + test + "EG" + ".exp", tiemposEG);
@@ -325,6 +318,6 @@ int main()
     //correr_test_catedra();
     //correr_test_catedra_experimentacion(1000);
     correr_test_nuestros_experimentacion(1000);
-
+    //correr_test_nuestros();
     return 0;
 }

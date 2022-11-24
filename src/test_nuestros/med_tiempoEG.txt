@@ -1,0 +1,2 @@
+Instancia 	 	 	 	  	 	 	& n 	 	 & m 	 	 & Tiempo tardado  	 & test_result 	 	 & Error Abs 	 	
+0.03067077 seg 	   & 	

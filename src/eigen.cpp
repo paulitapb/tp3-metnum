@@ -30,10 +30,11 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
 				SVector filaPivot = A.innerVector(i);
 				SVector filaJ = A.innerVector(j);
 
-				if (abs(A.coeff(j, i)) < epsilon)
+				/* if (abs(A.coeff(j, i)) < epsilon)
 				{
+					cout <<"Salta fila"<<endl;
 					continue;
-				}
+				} */
 
 				double mji = A.coeff(j, i) / aii;
 				// cout << "Mji es " << mji << endl;
