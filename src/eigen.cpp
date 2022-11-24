@@ -21,7 +21,7 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
 	for (int i = 0; i < A.outerSize() - 1; i++)
 	{ // Por cada fila pivot
 		double aii = A.coeff(i, i);
-		
+
 		if (abs(aii) > epsilon)
 		{
 			for (int j = i + 1; j < A.outerSize(); j++)
@@ -138,7 +138,7 @@ bool areEqual(Vector x1, Vector x2, double e)
 	return true;
 }
 
-Vector jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
+tuple<Vector, int> jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 {
 	Vector prev = x + Vector::Ones(x.size());
 	int iter = 0;
@@ -151,11 +151,11 @@ Vector jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 		}
 		iter++;
 	}
-	//cout << iter <<endl;
-	return x;
+	// cout << iter <<endl;
+	return make_tuple(x, iter);
 }
 
-Vector gauss_seidel(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
+tuple<Vector, int> gauss_seidel(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 {
 	// el vector previous no lo necesito mas como vector porque no lo voy a recorrer nunca
 	// lo unico que quizas puede ser que pase es que queramos comparar todo el vector previo con el ultimo x
@@ -170,8 +170,8 @@ Vector gauss_seidel(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
 		}
 		iter++;
 	}
-	//cout << iter <<endl;
-	return x;
+	// cout << iter <<endl;
+	return make_tuple(x, iter);
 }
 
 pair<double, Vector> power_iteration(const Matrix &X, unsigned niter, double eps)
