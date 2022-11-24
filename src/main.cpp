@@ -33,10 +33,15 @@ vector<string> tests_implementaciones = {
     "clique20.txt",
     "clique30.txt", 
     "clique40.txt", 
-    "clique50.txt"
-    
-    "binomial_graph100_1.txt", 
-    "binomial_graph100_2.txt"};
+    "clique50.txt",
+
+    "binomial_graph50_1.txt",
+    "binomial_graph50_2.txt",
+    "binomial_graph50_3.txt",
+    "binomial_graph50_4.txt",
+    "binomial_graph50_5.txt",
+    "binomial_graph50_6.txt",
+    "binomial_graph50_8.txt"};
 
 vector<double> p = {0.9, 0.8, 0.76, 0.85, 0.5, 0.64, 0.3};
 
@@ -209,15 +214,15 @@ void correr_test_catedra_experimentacion(int reps)
             auto inicio = chrono::high_resolution_clock::now();
 
             // Calculo de rankings
-            //Vector puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
-            Vector puntajes_finales = page_rank_GS("tests/" + test, p[i-1]);
+            Vector puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
+            //Vector puntajes_finales = page_rank_Jacobi("tests/" + test, p[i-1]);
 
             auto final = chrono::high_resolution_clock::now();
             chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
 
             tiempos[j] = tiempo_ejecucion1.count();
         }
-        std::string res_out = (string) "tiempos_exp/" + test + "GS" + ".exp";
+        std::string res_out = (string) "tiempos_exp/" + test + "EG" + ".exp";
 
         write_time_results(res_out, tiempos);
     }
@@ -283,25 +288,35 @@ void correr_test_nuestros_experimentacion(int reps)
     for (string test : tests_implementaciones)
     {
         cout << "corriendo test " << test << " con p " << p << endl;
-        vector<double> tiempos(reps, 0);
+        vector<double> tiemposEG(reps, 0);
+        vector<double> tiemposJac(reps, 0);
+        vector<double> tiemposGS(reps, 0);
 
         for (int j = 0; j < reps; j++)
         {
             // Medir tiempos
             auto inicio = chrono::high_resolution_clock::now();
-
             // Calculo de rankings
-            //Vector puntajes_finales = page_rank_EG("test_nuestros/" + test, p);
-            Vector puntajes_finales = page_rank_GS("test_nuestros/" + test, p);
-
+            Vector puntajes_finalesEG = page_rank_EG("test_nuestros/" + test, p);
             auto final = chrono::high_resolution_clock::now();
             chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
+            tiemposEG[j] = tiempo_ejecucion1.count();
 
-            tiempos[j] = tiempo_ejecucion1.count();
+            inicio = chrono::high_resolution_clock::now();
+            Vector puntajes_finalesJac = page_rank_Jacobi("test_nuestros/" + test, p);
+            final = chrono::high_resolution_clock::now();
+            tiempo_ejecucion1 = final - inicio;
+            tiemposJac[j] = tiempo_ejecucion1.count();
+
+            inicio = chrono::high_resolution_clock::now();
+            Vector puntajes_finalesGS = page_rank_GS("test_nuestros/" + test, p);
+            final = chrono::high_resolution_clock::now();
+            tiempo_ejecucion1 = final - inicio;
+            tiemposGS[j] = tiempo_ejecucion1.count();
         }
-        std::string res_out = (string) "tiempos_exp/" + test + "GS" + ".exp";
-
-        write_time_results(res_out, tiempos);
+        write_time_results((string) "tiempos_exp/" + test + "EG" + ".exp", tiemposEG);
+        write_time_results((string) "tiempos_exp/" + test + "Jac" + ".exp", tiemposJac);
+        write_time_results((string) "tiempos_exp/" + test + "GS" + ".exp", tiemposGS);
     }
 }
 

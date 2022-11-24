@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -pedantic -O3 -lm -Wall -Wextra -g
+CFLAGS = -O3 -lm 
 CFLAGS2 := -O3 -Wall -std=c++11
 
 TARGET = tp3

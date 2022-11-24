@@ -4,7 +4,7 @@
 
 #include "eigen.h"
 
-#define CHECKPIVOT 1;
+#define CHECKPIVOT 0;
 using namespace std;
 
 // Matriz, dinámica, de tamaño arbitrario (X), con elementos del tipo Double(D)
