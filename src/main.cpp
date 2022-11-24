@@ -153,7 +153,7 @@ pair<Vector, int> page_rank_GS(string test_path, double p)
 void correr_test_catedra()
 {
 
-    string output_path = "tests/med_tiempoEG.txt";
+    string output_path = "tests/med_tiempoGS.txt";
     // archivo de salida que me da el resultado de los test
     ofstream archivo_salida(output_path);
     archivo_salida << "Instancia \t \t \t \t  \t \t \t& n \t \t & m \t \t & Tiempo tardado  \t & test_result \t \t & Error Abs \t \t" << endl;
@@ -171,7 +171,9 @@ void correr_test_catedra()
 
         // Calculo de rankings
         Vector puntajes_finales;
-        puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
+        //puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
+        std::pair<Vector, int> r = page_rank_GS("tests/" + test, p[i - 1]);
+        puntajes_finales = r.first;
         // int iters;
         // tie(puntajes_finales,iters) = page_rank_GS("tests/" + test, p[i-1]);
 
@@ -367,11 +369,11 @@ void correr_test_nuestros_iteraciones(int reps)
 
 int main()
 {
-    // correr_test_catedra();
+    correr_test_catedra();
     // correr_test_catedra_experimentacion(1000);
     //correr_test_nuestros_experimentacion(1000);
     // correr_test_nuestros();
-    correr_test_nuestros_iteraciones(14);
+    //correr_test_nuestros_iteraciones(14);
     return 0;
 }
 
