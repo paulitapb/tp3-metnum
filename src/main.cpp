@@ -27,12 +27,12 @@ vector<string> tests_implementaciones = {
     "test_antisupernodo_20.txt",
     "test_antisupernodo_30.txt",
     "test_antisupernodo_40.txt",
-    "test_antisupernodo_50.txt", 
+    "test_antisupernodo_50.txt",
 
-    "clique10.txt", 
+    "clique10.txt",
     "clique20.txt",
-    "clique30.txt", 
-    "clique40.txt", 
+    "clique30.txt",
+    "clique40.txt",
     "clique50.txt",
 
     "binomial_graph50_1.txt",
@@ -40,9 +40,9 @@ vector<string> tests_implementaciones = {
     "binomial_graph50_3.txt",
     "binomial_graph50_4.txt",
     "binomial_graph50_5.txt",
-    "binomial_graph50_6.txt", 
+    "binomial_graph50_6.txt",
     "binomial_graph50_8.txt",
-    
+
     "density50_10.txt",
     "density50_20.txt",
     "density50_30.txt",
@@ -104,7 +104,7 @@ Vector page_rank_EG(string test_path, double p)
     return ranks;
 }
 
-Vector page_rank_Jacobi(string test_path, double p)
+pair<Vector, int> page_rank_Jacobi(string test_path, double p)
 {
 
     SparseMatrix W = read_test(test_path);
@@ -117,15 +117,17 @@ Vector page_rank_Jacobi(string test_path, double p)
     Vector xo = Vector::Ones(n);
 
     // Triangulamos el sistema
-    Vector ranks= jacobi(xo, xo, A, 10000, epsilon);
+    Vector ranks;
+    int iters;
+    tie(ranks, iters) = jacobi(xo, xo, A, 10000, epsilon);
 
     // Normalizo la solucion
     normalizar_vector(ranks);
 
-    return ranks;
+    return make_pair(ranks, iters);
 }
 
-Vector page_rank_GS(string test_path, double p)
+pair<Vector, int> page_rank_GS(string test_path, double p)
 {
 
     SparseMatrix W = read_test(test_path);
@@ -138,12 +140,14 @@ Vector page_rank_GS(string test_path, double p)
     Vector xo = Vector::Ones(n);
 
     // Triangulamos el sistema
-    Vector ranks = gauss_seidel(xo, xo, A, 10000, epsilon);
+    Vector ranks;
+    int iters;
+    tie(ranks, iters) = gauss_seidel(xo, xo, A, 10000, epsilon);
 
     // Normalizo la solucion
     normalizar_vector(ranks);
 
-    return ranks;
+    return make_pair(ranks, iters);
 }
 
 void correr_test_catedra()
@@ -166,8 +170,10 @@ void correr_test_catedra()
         auto inicio = chrono::high_resolution_clock::now();
 
         // Calculo de rankings
-        Vector puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
-        //Vector puntajes_finales = page_rank_GS("tests/" + test, p[i-1]);
+        Vector puntajes_finales;
+        puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
+        // int iters;
+        // tie(puntajes_finales,iters) = page_rank_GS("tests/" + test, p[i-1]);
 
         auto final = chrono::high_resolution_clock::now();
         chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
@@ -216,8 +222,10 @@ void correr_test_catedra_experimentacion(int reps)
             auto inicio = chrono::high_resolution_clock::now();
 
             // Calculo de rankings
-            Vector puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
-            //Vector puntajes_finales = page_rank_Jacobi("tests/" + test, p[i-1]);
+            Vector puntajes_finales;
+            puntajes_finales = page_rank_EG("tests/" + test, p[i - 1]);
+            // int iters;
+            // tie(puntajes_finales,iters) = page_rank_Jacobi("tests/" + test, p[i-1]);
 
             auto final = chrono::high_resolution_clock::now();
             chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
@@ -248,9 +256,11 @@ void correr_test_nuestros()
         auto inicio = chrono::high_resolution_clock::now();
 
         // Calculo de rankings
-        Vector puntajes_finales = page_rank_EG("test_nuestros/" + test, p);
+        Vector puntajes_finales;
+        puntajes_finales = page_rank_EG("test_nuestros/" + test, p);
 
-        // Vector puntajes_finales = page_rank_Jacobi("test_nuestros/" + test, p);
+        // int iters;
+        // tie(puntajes_finales,iters) = page_rank_Jacobi("test_nuestros/" + test, p);
         auto final = chrono::high_resolution_clock::now();
 
         chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
@@ -287,24 +297,28 @@ void correr_test_nuestros_experimentacion(int reps)
             auto inicio = chrono::high_resolution_clock::now();
             // Calculo de rankings
             Vector puntajes_finalesEG = page_rank_EG("test_nuestros/" + test, p);
-            
+
             auto final = chrono::high_resolution_clock::now();
             chrono::duration<double, std::milli> tiempo_ejecucion1 = final - inicio;
-            
+
             tiemposEG[j] = tiempo_ejecucion1.count();
 
             inicio = chrono::high_resolution_clock::now();
-            Vector puntajes_finalesJac = page_rank_Jacobi("test_nuestros/" + test, p);
+            Vector puntajes_finalesJac;
+            int itersJ;
+            tie(puntajes_finalesJac, itersJ) = page_rank_Jacobi("test_nuestros/" + test, p);
             final = chrono::high_resolution_clock::now();
             tiempo_ejecucion1 = final - inicio;
-            
+
             tiemposJac[j] = tiempo_ejecucion1.count();
 
             inicio = chrono::high_resolution_clock::now();
-            Vector puntajes_finalesGS = page_rank_GS("test_nuestros/" + test, p);
+            Vector puntajes_finalesGS;
+            int itersGS;
+            tie(puntajes_finalesGS, itersGS) = page_rank_GS("test_nuestros/" + test, p);
             final = chrono::high_resolution_clock::now();
             tiempo_ejecucion1 = final - inicio;
-            
+
             tiemposGS[j] = tiempo_ejecucion1.count();
         }
         write_time_results((string) "tiempos_exp/" + test + "EG" + ".exp", tiemposEG);
@@ -313,11 +327,50 @@ void correr_test_nuestros_experimentacion(int reps)
     }
 }
 
+void correr_test_nuestros_iteraciones(int reps)
+{
+    double p = 0.75;
+    int i = 0;
+    for (string test : tests_implementaciones)
+    {
+        cout << "corriendo test " << test << " con p " << p << endl;
+
+        vector<double> epsilons(reps, 0);
+
+        vector<int> iteracionesJ(reps, 0);
+        vector<int> iteracionesGS(reps, 0);
+
+        epsilon = 1e-15;
+        for (int j = 0; j < reps; j++)
+        {
+            epsilon *= 10;
+            epsilons[j] = epsilon;
+            // Calculo de rankings
+
+            Vector puntajes_finalesJac;
+            int iterJ;
+            tie(puntajes_finalesJac, iterJ) = page_rank_Jacobi("test_nuestros/" + test, p);
+            iteracionesJ[j] = iterJ;
+
+            Vector puntajes_finalesGS;
+            int iterGS;
+            tie(puntajes_finalesGS, iterGS) = page_rank_GS("test_nuestros/" + test, p);
+            iteracionesGS[j] = iterGS;
+        }
+        write_iters_results((string) "iters_exp/" + test + "Jac" + ".exp", iteracionesJ, epsilons);
+        write_iters_results((string) "iters_exp/" + test + "GS" + ".exp", iteracionesGS, epsilons);
+        epsilon = 1e-15;
+    }
+    // reseteo al epsilon original
+    epsilon = 1e-10;
+}
+
 int main()
 {
-    //correr_test_catedra();
-    //correr_test_catedra_experimentacion(1000);
+    // correr_test_catedra();
+    // correr_test_catedra_experimentacion(1000);
     correr_test_nuestros_experimentacion(1000);
-    //correr_test_nuestros();
+    // correr_test_nuestros();
+    // correr_test_nuestros_iteraciones(14);
     return 0;
 }
