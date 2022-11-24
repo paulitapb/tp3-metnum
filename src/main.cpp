@@ -369,8 +369,21 @@ int main()
 {
     // correr_test_catedra();
     // correr_test_catedra_experimentacion(1000);
-    correr_test_nuestros_experimentacion(1000);
+    //correr_test_nuestros_experimentacion(1000);
     // correr_test_nuestros();
-    // correr_test_nuestros_iteraciones(14);
+    correr_test_nuestros_iteraciones(14);
     return 0;
 }
+
+/* //main entrega
+int main(int argc, const char * argv[]){
+    string archivo; 
+    cin >> archivo; 
+    double p;
+    cin >> p;
+    vector<double> puntajes_finales = calculo_rankings_CSR(archivo, p); 
+    string res_path = archivo + ".out"; 
+    resultados_tests(res_path, puntajes_finales);
+    return 0; 
+
+} */
