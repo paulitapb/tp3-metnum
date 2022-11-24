@@ -8,19 +8,11 @@
 #include "eigen.h"
 using namespace std;
 
-namespace py=pybind11;
+namespace py = pybind11;
 
-PYBIND11_MODULE(metnum, m) {
+PYBIND11_MODULE(metnum, m)
+{
     m.def(
-        "power_iteration", &power_iteration,
-        "doingthings"
-    );
-    m.def(
-        "deflation", &deflation,
-        "doingthings"
-    );
-    m.def(
-        "elim_gauss", &elim_gauss, 
-        "doingthings"
-    ); 
+        "elim_gauss", &elim_gauss,
+        "doingthings");
 }
