@@ -367,7 +367,7 @@ void correr_test_nuestros_iteraciones(int reps)
     epsilon = 1e-10;
 }
 
-int main()
+/* int main()
 {
     correr_test_catedra();
     // correr_test_catedra_experimentacion(1000);
@@ -375,17 +375,26 @@ int main()
     // correr_test_nuestros();
     //correr_test_nuestros_iteraciones(14);
     return 0;
-}
+} */
 
-/* //main entrega
+//main entrega
 int main(int argc, const char * argv[]){
     string archivo; 
     cin >> archivo; 
     double p;
     cin >> p;
-    vector<double> puntajes_finales = calculo_rankings_CSR(archivo, p); 
-    string res_path = archivo + ".out"; 
-    resultados_tests(res_path, puntajes_finales);
+    string metodo; 
+    cin >> metodo;
+    Vector puntajes_finales; 
+    if(metodo == "EG"){
+        puntajes_finales = page_rank_EG(archivo, p); 
+    }else if(metodo == "J"){
+        puntajes_finales = page_rank_Jacobi(archivo, p).first; 
+    }else{
+        puntajes_finales = page_rank_GS(archivo, p).first; 
+    }
+    
+    cout << puntajes_finales <<endl; 
     return 0; 
 
-} */
+}
