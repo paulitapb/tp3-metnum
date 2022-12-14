@@ -4,7 +4,6 @@
 
 #include "eigen.h"
 
-#define CHECKPIVOT 0;
 using namespace std;
 
 // Matriz, dinámica, de tamaño arbitrario (X), con elementos del tipo Double(D)
@@ -30,14 +29,8 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
 				SVector filaPivot = A.innerVector(i);
 				SVector filaJ = A.innerVector(j);
 
-				/* if (abs(A.coeff(j, i)) < epsilon)
-				{
-					cout <<"Salta fila"<<endl;
-					continue;
-				} */
-
 				double mji = A.coeff(j, i) / aii;
-				// cout << "Mji es " << mji << endl;
+				
 				v.coeffRef(j) = v.coeffRef(j) - mji * v.coeffRef(i);
 				// It sobre la fila pivot
 				SVector::InnerIterator itPivot(filaPivot);
@@ -62,26 +55,6 @@ void elim_gauss(SparseMatrix &A, Vector &v, double epsilon)
 					}
 				}
 			}
-		}
-		else
-		{ // TODO //NO CHEQUEA SI LA COLUMNA ES CERO!!!
-#ifdef CHECKPIVOT
-			bool rompe = false;
-			Eigen::Block<Eigen::SparseMatrix<double, 1, int>, -1, 1, false> columnita = A.col(i);
-			for (int k = i + 1; k < columnita.innerSize(); k++)
-			{
-				if (abs(columnita.coeffRef(k, 0)) < epsilon)
-				{
-					cout << "No se pivotear" << endl;
-					rompe = true;
-					break;
-				}
-			}
-			if (rompe)
-			{
-				break;
-			}
-#endif
 		}
 	}
 }
@@ -110,7 +83,7 @@ Vector backward_sust(SparseMatrix &A, Vector &b)
 	return res;
 }
 
-double iterativeSum(Vector x, SparseMatrix &A, int i)
+double iterativeSum(Vector &x, SparseMatrix &A, int i)
 {
 	// como el x va a tener actualizadas las posiciones hasta i-1 y las siguientes van a ser de la iteracion anterior (GS),
 	// la suma es la misma para gauss-seidel y jacobi, nada mas que a uno le paso el vector que estoy actualizando y al otro el previo
@@ -125,7 +98,7 @@ double iterativeSum(Vector x, SparseMatrix &A, int i)
 	return sum;
 }
 
-bool areEqual(Vector x1, Vector x2, double e)
+bool areEqual(Vector &x1, Vector &x2, double e)
 {
 	if (x1.size() != x2.size())
 		return false;
@@ -139,7 +112,7 @@ bool areEqual(Vector x1, Vector x2, double e)
 	return true;
 }
 
-tuple<Vector, int> jacobi(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
+tuple<Vector, int> jacobi(Vector &x, Vector &b, SparseMatrix &A, int k, double epsilon)
 {
 	Vector prev = x + Vector::Ones(x.size());
 	int iter = 0;
@@ -156,7 +129,7 @@ tuple<Vector, int> jacobi(Vector x, Vector b, SparseMatrix &A, int k, double eps
 	return make_tuple(x, iter);
 }
 
-tuple<Vector, int> gauss_seidel(Vector x, Vector b, SparseMatrix &A, int k, double epsilon)
+tuple<Vector, int> gauss_seidel(Vector &x, Vector &b, SparseMatrix &A, int k, double epsilon)
 {
 	// el vector previous no lo necesito mas como vector porque no lo voy a recorrer nunca
 	// lo unico que quizas puede ser que pase es que queramos comparar todo el vector previo con el ultimo x

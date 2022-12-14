@@ -367,18 +367,18 @@ void correr_test_nuestros_iteraciones(int reps)
     epsilon = 1e-10;
 }
 
-/* int main()
+int main()
 {
-    correr_test_catedra();
+    //correr_test_catedra();
     // correr_test_catedra_experimentacion(1000);
-    //correr_test_nuestros_experimentacion(1000);
+    correr_test_nuestros_experimentacion(1000);
     // correr_test_nuestros();
     //correr_test_nuestros_iteraciones(14);
     return 0;
-} */
+}
 
 //main entrega
-int main(int argc, const char * argv[]){
+int main_en(int argc, const char * argv[]){
     string archivo; 
     cin >> archivo; 
     double p;

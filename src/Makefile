@@ -1,9 +1,8 @@
 CC = g++
-CFLAGS = -O3 -lm 
-CFLAGS2 := -O3 -Wall -std=c++11
+CFLAGS = -O3 -std=c++11
 
 TARGET = tp3
-INCLUDES = -I ../src/  -I /usr/include/python3.8
+INCLUDES = -I ../src/  
 
 all: $(TARGET)
 
